@@ -1,8 +1,10 @@
 #include <iostream>
 #include <Renderer.h>
+#include <Ship.h>
 
-Renderer::Renderer() : Renderer(640, 480){};
-Renderer::Renderer(int screen_width, int screen_height) : SCREEN_WIDTH(screen_width), SCREEN_HEIGHT(screen_height)
+#include "SDL2/SDL_image.h"
+
+Renderer::Renderer(std::shared_ptr<Settings> settings) : _settings(settings)
 {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -13,8 +15,8 @@ Renderer::Renderer(int screen_width, int screen_height) : SCREEN_WIDTH(screen_wi
     else
     {
         sdl_window = SDL_CreateWindow("Alien Invasion", SDL_WINDOWPOS_CENTERED,
-                                      SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH,
-                                      SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+                                      SDL_WINDOWPOS_CENTERED, _settings->getScreenWidth(),
+                                      _settings->getScreenHeight(), SDL_WINDOW_SHOWN);
         if (sdl_window == NULL)
         {
             std::cerr << "Window could not be created.\n";
@@ -30,6 +32,9 @@ Renderer::Renderer(int screen_width, int screen_height) : SCREEN_WIDTH(screen_wi
             }
         }
     }
+
+    // Load ship
+    ship_surface = IMG_Load("../src/images/rocket.png");
 };
 Renderer::~Renderer()
 {
@@ -37,13 +42,34 @@ Renderer::~Renderer()
     SDL_Quit();
 }
 
+void Renderer::renderShip()
+{
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
+    SDL_Rect dstrect = {0, 0, 100, 100};
+    SDL_RenderCopy(sdl_renderer, texture, NULL, &dstrect);
+}
+
+// void Renderer::renderShip(Ship *ship)
+// {
+// }
+
+void Renderer::renderBackground()
+{
+    int BackgroundR{0};
+    int BackgroundG{0};
+    int BackgroundB{0};
+    int BackgroundA{0};
+    _settings->getBackgroundColors(BackgroundR, BackgroundG, BackgroundB, BackgroundA);
+    SDL_SetRenderDrawColor(sdl_renderer, BackgroundR, BackgroundG, BackgroundB, BackgroundA);
+}
+
 void Renderer::render()
 {
     // Clear screen
-    // SDL_SetRenderDrawColor(sdl_renderer, 20, 20, 20, 255);
-    SDL_SetRenderDrawColor(sdl_renderer, cBackgroundR, cBackgroundG, cBackgroundB, cBackgroundAlpha);
-
     SDL_RenderClear(sdl_renderer);
+
+    renderBackground();
+    renderShip();
+
     SDL_RenderPresent(sdl_renderer);
-    // SDL_Delay(2000);
 }

@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(CTest)
 enable_testing()
 
-add_executable(SpaceInvader src/main.cpp src/AlienInvasion.cpp src/Renderer.cpp src/Controller.cpp)
+add_executable(SpaceInvader src/main.cpp src/AlienInvasion.cpp src/Renderer.cpp src/Controller.cpp src/Settings.cpp src/Ship.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

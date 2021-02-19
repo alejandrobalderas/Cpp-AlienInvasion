@@ -1,27 +1,29 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 #include <SDL2/SDL.h>
+#include "Settings.h"
+#include <memory>
+#include "Ship.h"
 
 class Renderer
 {
 public:
-    Renderer();
-    Renderer(int screen_width, int screen_height);
+    Renderer(std::shared_ptr<Settings>);
     ~Renderer();
     void render();
+    SDL_Renderer *getRenderer() { return sdl_renderer; }
+    // void renderShip(Ship *ship);
+    void renderShip();
+    void renderBackground();
 
 private:
-    const int SCREEN_WIDTH = 640;
-    const int SCREEN_HEIGHT = 480;
+    std::shared_ptr<Settings> _settings;
 
     SDL_Window *sdl_window;
     SDL_Surface *sdl_surface;
     SDL_Renderer *sdl_renderer;
 
-    int cBackgroundR{20};
-    int cBackgroundG{20};
-    int cBackgroundB{50};
-    int cBackgroundAlpha{255};
+    SDL_Surface *ship_surface;
 };
 
 #endif

@@ -15,9 +15,9 @@ void Controller::handleInput(SDL_Event *e, bool &quit)
         {
             switch (e->key.keysym.sym)
             {
-                // case SDLK_q:
-                //     std::cout << "q" << std::endl;
-                //     break;
+            case SDLK_q:
+                std::cout << "q" << std::endl;
+                break;
 
             case SDLK_UP:
                 std::cout << "Up" << std::endl;

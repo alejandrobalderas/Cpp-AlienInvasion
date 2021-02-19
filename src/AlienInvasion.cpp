@@ -3,10 +3,15 @@
 #include <AlienInvasion.h>
 #include <SDL.h>
 #include "Renderer.h"
+#include "Settings.h"
+// #include "Ship.h"
 
 AlienInvasion::AlienInvasion()
 {
-    controller = Controller();
+    settings = std::make_shared<Settings>();
+    renderer = std::make_shared<Renderer>(settings);
+    controller = std::make_unique<Controller>();
+    // ship = std::make_unique<Ship>(renderer);
 }
 
 AlienInvasion::~AlienInvasion()
@@ -16,18 +21,18 @@ AlienInvasion::~AlienInvasion()
 void AlienInvasion::runGame()
 {
 
-    SDL_Event e;
-    bool quit = false;
-    Uint32 frame_start;
-    Uint32 frame_end;
-    Uint32 frame_duration;
+    int frame_start;
+    int frame_end;
+    int frame_duration;
+    int target_frame_duration = settings->getTargetFrameDuration();
 
     std::cout << "Starting game loop" << std::endl;
-    while (!quit)
+    while (!quitGame)
     {
         frame_start = SDL_GetTicks();
-        controller.handleInput(&e, quit);
-        sdl_renderer.render();
+
+        controller->handleInput(&e, quitGame);
+        renderer->render();
 
         frame_end = SDL_GetTicks();
         frame_duration = frame_end - frame_start;
