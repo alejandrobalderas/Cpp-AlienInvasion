@@ -4,7 +4,7 @@
 
 #include "SDL2/SDL_image.h"
 
-Renderer::Renderer(std::shared_ptr<Settings> settings) : _settings(settings)
+Renderer::Renderer(std::shared_ptr<Settings> settings) : settings(settings)
 {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -15,8 +15,8 @@ Renderer::Renderer(std::shared_ptr<Settings> settings) : _settings(settings)
     else
     {
         sdl_window = SDL_CreateWindow("Alien Invasion", SDL_WINDOWPOS_CENTERED,
-                                      SDL_WINDOWPOS_CENTERED, _settings->getScreenWidth(),
-                                      _settings->getScreenHeight(), SDL_WINDOW_SHOWN);
+                                      SDL_WINDOWPOS_CENTERED, settings->getScreenWidth(),
+                                      settings->getScreenHeight(), SDL_WINDOW_SHOWN);
         if (sdl_window == NULL)
         {
             std::cerr << "Window could not be created.\n";
@@ -45,7 +45,9 @@ Renderer::~Renderer()
 void Renderer::renderShip()
 {
     SDL_Texture *texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
-    SDL_Rect dstrect = {0, 0, 100, 100};
+    // SDL_Rect dstrect = {10, 10, 100, 100};
+    int SHAPE_SIZE = 60;
+    SDL_Rect dstrect = {settings->getScreenWidth() / 2 - SHAPE_SIZE / 2, settings->getScreenHeight() - SHAPE_SIZE, SHAPE_SIZE, SHAPE_SIZE};
     SDL_RenderCopy(sdl_renderer, texture, NULL, &dstrect);
 }
 
@@ -59,7 +61,7 @@ void Renderer::renderBackground()
     int BackgroundG{0};
     int BackgroundB{0};
     int BackgroundA{0};
-    _settings->getBackgroundColors(BackgroundR, BackgroundG, BackgroundB, BackgroundA);
+    settings->getBackgroundColors(BackgroundR, BackgroundG, BackgroundB, BackgroundA);
     SDL_SetRenderDrawColor(sdl_renderer, BackgroundR, BackgroundG, BackgroundB, BackgroundA);
 }
 

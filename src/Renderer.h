@@ -17,7 +17,7 @@ public:
     void renderBackground();
 
 private:
-    std::shared_ptr<Settings> _settings;
+    std::shared_ptr<Settings> settings;
 
     SDL_Window *sdl_window;
     SDL_Surface *sdl_surface;
