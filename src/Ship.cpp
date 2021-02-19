@@ -7,7 +7,7 @@ Ship::Ship(std::shared_ptr<Settings> &settings) : _settings(settings)
 
     image = IMG_Load(path_to_image.c_str());
     int shape_size = _settings->getShipShapeSize();
-    dstrect = {_settings->getScreenWidth() / 2 - shape_size / 2, _settings->getScreenHeight() - shape_size, shape_size, shape_size};
+    rRect = {_settings->getScreenWidth() / 2 - shape_size / 2, _settings->getScreenHeight() - shape_size, shape_size, shape_size};
 }
 // Ship::Ship(std::shared_ptr<Renderer> renderer) : renderer(renderer)
 // {
@@ -24,6 +24,12 @@ void Ship::getTexture(SDL_Renderer *rR)
 
 void Ship::draw(SDL_Renderer *renderer)
 {
+    SDL_RenderCopy(renderer, ship_texture, NULL, &rRect);
+}
 
-    SDL_RenderCopy(renderer, ship_texture, NULL, &dstrect);
+void Ship::move(int dx, int dy)
+{
+
+    rRect.x = rRect.x + dx * speed;
+    rRect.y += dy;
 }

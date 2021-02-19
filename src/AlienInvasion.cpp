@@ -46,7 +46,7 @@ void AlienInvasion::runGame()
     std::cout << "Starting game loop" << std::endl;
     while (!quitGame)
     {
-        controller->handleInput(&e, quitGame);
+        controller->handleInput(&e, ship, quitGame);
         //Render here
         updateScreen();
     }

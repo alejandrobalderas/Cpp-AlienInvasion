@@ -13,7 +13,9 @@ private:
     SDL_Surface *image;
     std::shared_ptr<Settings> _settings;
     // std::shared_ptr<Renderer> renderer;
-    SDL_Rect dstrect;
+    SDL_Rect rRect;
+
+    int speed{100};
 
 public:
     // Ship(std::shared_ptr<Renderer>);
@@ -22,6 +24,7 @@ public:
     SDL_Texture *ship_texture;
     void blitme();
     void draw(SDL_Renderer *sdl_renderer);
+    void move(int dx = 0, int dy = 0);
 
     void getTexture(SDL_Renderer *rR);
 };
