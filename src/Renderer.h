@@ -1,19 +1,19 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 #include <SDL2/SDL.h>
-#include "Settings.h"
 #include <memory>
+#include "Settings.h"
 #include "Ship.h"
 
 class Renderer
 {
 public:
-    Renderer(std::shared_ptr<Settings>);
+    Renderer(std::shared_ptr<Settings> &settings);
     ~Renderer();
     void render();
-    SDL_Renderer *getRenderer() { return sdl_renderer; }
+    SDL_Renderer *getSDLRenderer() { return sdl_renderer; }
     // void renderShip(Ship *ship);
-    void renderShip();
+    void renderShip(std::shared_ptr<Ship>);
     void renderBackground();
 
 private:

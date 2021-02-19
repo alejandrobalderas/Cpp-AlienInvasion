@@ -13,6 +13,8 @@ private:
 
     int target_frame_duration{1000 / 60};
 
+    int ship_shape_size = 60;
+
 public:
     Settings();
     int getTargetFrameDuration()
@@ -34,6 +36,8 @@ public:
         b = colorBackgroundB;
         a = colorBackgroundAlpha;
     }
+
+    int getShipShapeSize() { return ship_shape_size; }
 };
 
 #endif

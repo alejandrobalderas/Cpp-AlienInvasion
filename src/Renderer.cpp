@@ -1,10 +1,9 @@
 #include <iostream>
-#include <Renderer.h>
-#include <Ship.h>
-
 #include "SDL2/SDL_image.h"
 
-Renderer::Renderer(std::shared_ptr<Settings> settings) : settings(settings)
+#include <Renderer.h>
+
+Renderer::Renderer(std::shared_ptr<Settings> &settings) : settings(settings)
 {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -42,14 +41,19 @@ Renderer::~Renderer()
     SDL_Quit();
 }
 
-void Renderer::renderShip()
+void Renderer::renderShip(std::shared_ptr<Ship> ship)
 {
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
-    // SDL_Rect dstrect = {10, 10, 100, 100};
-    int SHAPE_SIZE = 60;
-    SDL_Rect dstrect = {settings->getScreenWidth() / 2 - SHAPE_SIZE / 2, settings->getScreenHeight() - SHAPE_SIZE, SHAPE_SIZE, SHAPE_SIZE};
-    SDL_RenderCopy(sdl_renderer, texture, NULL, &dstrect);
+    ship->draw(sdl_renderer);
 }
+
+// void Renderer::renderShip()
+// {
+//     SDL_Texture *texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
+//     // SDL_Rect dstrect = {10, 10, 100, 100};
+//     int SHAPE_SIZE = 60;
+//     SDL_Rect dstrect = {settings->getScreenWidth() / 2 - SHAPE_SIZE / 2, settings->getScreenHeight() - SHAPE_SIZE, SHAPE_SIZE, SHAPE_SIZE};
+//     SDL_RenderCopy(sdl_renderer, texture, NULL, &dstrect);
+// }
 
 // void Renderer::renderShip(Ship *ship)
 // {
@@ -71,7 +75,6 @@ void Renderer::render()
     SDL_RenderClear(sdl_renderer);
 
     renderBackground();
-    renderShip();
 
     SDL_RenderPresent(sdl_renderer);
 }

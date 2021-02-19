@@ -2,8 +2,8 @@
 #define ALIENINVASION_H
 
 #include <iostream>
-#include <Renderer.h>
 #include <memory>
+#include "Renderer.h"
 #include "Controller.h"
 #include "Settings.h"
 #include "Ship.h"
@@ -14,6 +14,8 @@ public:
     AlienInvasion();
     ~AlienInvasion();
     void runGame();
+    void updateScreen();
+    void applyDelayIfNeeded(int, int);
 
 private:
     bool quitGame = false;
@@ -22,7 +24,7 @@ private:
     std::shared_ptr<Renderer> renderer;
     std::unique_ptr<Controller> controller;
 
-    // std::unique_ptr<Ship> ship;
+    std::shared_ptr<Ship> ship;
 };
 
 #endif
