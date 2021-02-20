@@ -10,11 +10,17 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 include(CTest)
 enable_testing()
 
-add_executable(SpaceInvader src/main.cpp src/AlienInvasion.cpp src/Renderer.cpp src/Controller.cpp src/Settings.cpp src/Ship.cpp)
+# add_executable(SpaceInvader src/main.cpp src/AlienInvasion.cpp src/Renderer.cpp src/Controller.cpp src/Settings.cpp src/Ship.cpp src/Bullet.cpp)
+
+file(GLOB_RECURSE alien_SOURCES "src/*.cpp")
+add_executable (SpaceInvader ${alien_SOURCES})
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+
+file(COPY src/images DESTINATION .)
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image REQUIRED)
