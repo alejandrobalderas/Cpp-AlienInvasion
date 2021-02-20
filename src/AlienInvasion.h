@@ -14,6 +14,7 @@ public:
     AlienInvasion();
     ~AlienInvasion();
     void runGame();
+    void draw();
     void updateScreen();
     void applyDelayIfNeeded(int, int);
 

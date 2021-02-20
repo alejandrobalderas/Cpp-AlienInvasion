@@ -8,7 +8,6 @@ void Controller::handleInput(SDL_Event *e, std::shared_ptr<Ship> ship, bool &qui
         if (e->type == SDL_QUIT)
         {
             quit = true;
-            std::cout << "q" << std::endl;
             break;
         }
         else if (e->type == SDL_KEYDOWN)
@@ -17,24 +16,28 @@ void Controller::handleInput(SDL_Event *e, std::shared_ptr<Ship> ship, bool &qui
             {
             case SDLK_q:
                 std::cout << "q" << std::endl;
-                break;
-
-            case SDLK_UP:
-                std::cout << "Up" << std::endl;
-                break;
-
-            case SDLK_DOWN:
-                std::cout << "Down" << std::endl;
+                quit = true;
                 break;
 
             case SDLK_LEFT:
                 std::cout << "Left" << std::endl;
-                ship->move(-1, 0);
+                ship->moveLeft();
                 break;
 
             case SDLK_RIGHT:
                 std::cout << "Right" << std::endl;
-                ship->move(1, 0);
+                ship->moveRight();
+                break;
+            }
+        }
+        else if (e->type == SDL_KEYUP)
+        {
+            switch (e->key.keysym.sym)
+            {
+            case SDLK_LEFT:
+            case SDLK_RIGHT:
+                std::cout << "Stop moving" << std::endl;
+                ship->stopMoving();
                 break;
             }
         }

@@ -14,6 +14,7 @@ private:
     int target_frame_duration{1000 / 60};
 
     int ship_shape_size = 60;
+    int ship_speed = 10;
 
 public:
     Settings();
@@ -38,6 +39,7 @@ public:
     }
 
     int getShipShapeSize() { return ship_shape_size; }
+    int getShipSpeed() { return ship_speed; }
 };
 
 #endif

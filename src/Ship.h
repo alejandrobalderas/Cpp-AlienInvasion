@@ -1,3 +1,6 @@
+// Forward declarations
+class Renderer;
+
 #ifndef SHIP_H
 #define SHIP_H
 
@@ -5,28 +8,38 @@
 #include <SDL2/SDL_image.h>
 #include <memory>
 #include "Settings.h"
+#include "Renderer.h"
+
+//Forward declaration or Renderer
 
 class Ship
 {
 private:
     std::string path_to_image = "../src/images/rocket.png";
-    SDL_Surface *image;
-    std::shared_ptr<Settings> _settings;
-    // std::shared_ptr<Renderer> renderer;
-    SDL_Rect rRect;
+    std::shared_ptr<Settings> m_settings;
+    std::shared_ptr<Renderer> _renderer;
+    SDL_Rect dstrect;
+    SDL_Renderer *rR;
 
     int speed{100};
+    bool m_movingRight{false};
+    bool m_movingLeft{false};
+
+    void loadTexture();
+    void loadDstrect();
 
 public:
     // Ship(std::shared_ptr<Renderer>);
     Ship(std::shared_ptr<Settings> &settings);
+    Ship(std::shared_ptr<Settings> settings, std::shared_ptr<Renderer> renderer);
     // Ship(std::shared_ptr<Renderer>);
     SDL_Texture *ship_texture;
     void blitme();
-    void draw(SDL_Renderer *sdl_renderer);
-    void move(int dx = 0, int dy = 0);
-
-    void getTexture(SDL_Renderer *rR);
+    void draw();
+    void update();
+    void moveLeft();
+    void moveRight();
+    void stopMoving();
 };
 
 #endif

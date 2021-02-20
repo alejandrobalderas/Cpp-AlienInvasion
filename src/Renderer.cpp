@@ -1,9 +1,21 @@
 #include <iostream>
 #include "SDL2/SDL_image.h"
 
-#include <Renderer.h>
+#include "Renderer.h"
 
 Renderer::Renderer(std::shared_ptr<Settings> &settings) : settings(settings)
+{
+    init();
+    // Load ship
+    ship_surface = IMG_Load("../src/images/rocket.png");
+};
+Renderer::~Renderer()
+{
+    SDL_DestroyWindow(sdl_window);
+    SDL_Quit();
+}
+
+void Renderer::init()
 {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -31,32 +43,11 @@ Renderer::Renderer(std::shared_ptr<Settings> &settings) : settings(settings)
             }
         }
     }
-
-    // Load ship
-    ship_surface = IMG_Load("../src/images/rocket.png");
-};
-Renderer::~Renderer()
-{
-    SDL_DestroyWindow(sdl_window);
-    SDL_Quit();
 }
 
-void Renderer::renderShip(std::shared_ptr<Ship> ship)
-{
-    ship->draw(sdl_renderer);
-}
-
-// void Renderer::renderShip()
+// void Renderer::renderShip(std::shared_ptr<Ship> ship)
 // {
-//     SDL_Texture *texture = SDL_CreateTextureFromSurface(sdl_renderer, ship_surface);
-//     // SDL_Rect dstrect = {10, 10, 100, 100};
-//     int SHAPE_SIZE = 60;
-//     SDL_Rect dstrect = {settings->getScreenWidth() / 2 - SHAPE_SIZE / 2, settings->getScreenHeight() - SHAPE_SIZE, SHAPE_SIZE, SHAPE_SIZE};
-//     SDL_RenderCopy(sdl_renderer, texture, NULL, &dstrect);
-// }
-
-// void Renderer::renderShip(Ship *ship)
-// {
+//     ship->draw(sdl_renderer);
 // }
 
 void Renderer::renderBackground()

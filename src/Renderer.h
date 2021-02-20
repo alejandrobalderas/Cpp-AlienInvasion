@@ -1,3 +1,6 @@
+//Forward declarations
+class Ship;
+
 #ifndef RENDERER_H
 #define RENDERER_H
 #include <SDL2/SDL.h>
@@ -24,6 +27,8 @@ private:
     SDL_Renderer *sdl_renderer;
 
     SDL_Surface *ship_surface;
+
+    void init();
 };
 
 #endif

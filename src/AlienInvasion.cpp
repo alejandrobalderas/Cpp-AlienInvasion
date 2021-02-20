@@ -8,8 +8,7 @@ AlienInvasion::AlienInvasion()
 {
     settings = std::make_shared<Settings>();
     renderer = std::make_shared<Renderer>(settings);
-    ship = std::make_unique<Ship>(settings);
-    ship->getTexture(renderer->getSDLRenderer());
+    ship = std::make_unique<Ship>(settings, renderer);
     controller = std::make_unique<Controller>();
 }
 
@@ -20,15 +19,17 @@ AlienInvasion::~AlienInvasion()
 // Updates all images on screen
 void AlienInvasion::updateScreen()
 {
-    int frame_start = SDL_GetTicks();
+    ship->update();
+}
 
+void AlienInvasion::draw()
+{
+    int frame_start = SDL_GetTicks();
     SDL_RenderClear(renderer->getSDLRenderer());
     renderer->renderBackground();
-    renderer->renderShip(ship);
+    ship->draw();
     SDL_RenderPresent(renderer->getSDLRenderer());
-
     int frame_end = SDL_GetTicks();
-
     applyDelayIfNeeded(frame_start, frame_end);
 }
 
@@ -47,7 +48,7 @@ void AlienInvasion::runGame()
     while (!quitGame)
     {
         controller->handleInput(&e, ship, quitGame);
-        //Render here
         updateScreen();
+        draw();
     }
 }
