@@ -40,6 +40,15 @@ public:
 
     int getShipShapeSize() const { return ship_shape_size; }
     int getShipSpeed() const { return ship_speed; }
+    // BulletSettings bulletSettings;
+};
+
+class BulletSettings
+{
+private:
+    float bullet_speed = 1.0;
+
+public:
 };
 
 #endif

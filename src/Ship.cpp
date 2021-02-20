@@ -1,8 +1,7 @@
-
 #include <iostream>
 #include "Ship.h"
 
-Ship::Ship(const Settings *settings, Renderer *renderer) : m_settings(settings), m_renderer(renderer)
+Ship::Ship(AlienInvasion *game) : m_settings(game->settings), m_renderer(game->renderer)
 {
     rR = m_renderer->getSDLRenderer();
     loadTexture();

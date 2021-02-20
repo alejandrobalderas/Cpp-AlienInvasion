@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Controller.h"
 
-void Controller::handleInput(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &quit)
+void Controller::handleInput(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit)
 {
     while (SDL_PollEvent(e))
     {
@@ -21,7 +21,7 @@ void Controller::handleInput(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &qu
     }
 }
 
-void Controller::checkKeyDown(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &quit)
+void Controller::checkKeyDown(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit)
 {
     switch (e->key.keysym.sym)
     {
@@ -45,7 +45,7 @@ void Controller::checkKeyDown(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &q
         break;
     }
 }
-void Controller::checkKeyUp(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &quit)
+void Controller::checkKeyUp(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit)
 {
     switch (e->key.keysym.sym)
     {

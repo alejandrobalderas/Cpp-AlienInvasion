@@ -3,7 +3,7 @@
 
 #include "Renderer.h"
 
-Renderer::Renderer(const Settings *settings) : settings(settings)
+Renderer::Renderer(const std::shared_ptr<Settings> settings) : settings(settings)
 {
     init();
     // Load ship

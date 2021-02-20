@@ -1,14 +1,14 @@
 
-#include <iostream>
-#include <SDL.h>
-
+#include "SDL2/SDL.h"
 #include "AlienInvasion.h"
 
 AlienInvasion::AlienInvasion()
 {
-    settings = std::make_unique<Settings>();
-    renderer = std::make_unique<Renderer>(settings.get());
-    ship = std::make_unique<Ship>(settings.get(), renderer.get());
+    settings = std::make_shared<Settings>();
+    renderer = std::make_shared<Renderer>(settings);
+    // ship = std::make_unique<Ship>(settings, renderer);
+    ship = std::make_shared<Ship>(this);
+    bullet = std::make_shared<Bullet>(this);
     controller = std::make_unique<Controller>();
 }
 

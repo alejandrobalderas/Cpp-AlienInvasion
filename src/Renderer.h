@@ -11,7 +11,7 @@ class Ship;
 class Renderer
 {
 public:
-    Renderer(const Settings *settings);
+    Renderer(const std::shared_ptr<Settings> settings);
     ~Renderer();
     void render();
     SDL_Renderer *getSDLRenderer() const { return sdl_renderer; }
@@ -20,7 +20,8 @@ public:
     void tmp();
 
 private:
-    const Settings *settings;
+    // const Settings *settings;
+    std::shared_ptr<Settings> settings;
 
     SDL_Window *sdl_window;
     SDL_Surface *sdl_surface;

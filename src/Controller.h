@@ -8,9 +8,9 @@
 class Controller
 {
 public:
-    void handleInput(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &quit);
-    void checkKeyDown(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &quit);
-    void checkKeyUp(SDL_Event *e, std::unique_ptr<Ship> &ship, bool &quit);
+    void handleInput(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit);
+    void checkKeyDown(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit);
+    void checkKeyUp(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit);
 
 private:
 };

@@ -1,4 +1,5 @@
 // Forward declarations
+class AlienInvasion;
 class Renderer;
 
 #ifndef SHIP_H
@@ -7,6 +8,7 @@ class Renderer;
 #include <string>
 #include <SDL2/SDL_image.h>
 #include <memory>
+#include "AlienInvasion.h"
 #include "Settings.h"
 #include "Renderer.h"
 
@@ -15,9 +17,9 @@ class Renderer;
 class Ship
 {
 private:
-    std::string path_to_image = "../src/images/rocket.png";
-    const Settings *m_settings;
-    const Renderer *m_renderer;
+    std::string path_to_image = "./images/rocket.png";
+    const std::shared_ptr<Settings> m_settings;
+    std::shared_ptr<Renderer> m_renderer;
     SDL_Rect dstrect;
     SDL_Renderer *rR;
 
@@ -30,11 +32,8 @@ private:
 
 public:
     // Ship(std::shared_ptr<Renderer>);
-    Ship(std::shared_ptr<Settings> &settings);
-    Ship(const Settings *settings, Renderer *renderer);
-    // Ship(std::shared_ptr<Renderer>);
+    Ship(AlienInvasion *game);
     SDL_Texture *ship_texture;
-    void blitme();
     void draw();
     void update();
     void moveLeft();
