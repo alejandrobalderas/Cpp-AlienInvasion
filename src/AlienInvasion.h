@@ -21,11 +21,11 @@ public:
 private:
     bool quitGame = false;
     SDL_Event e;
-    std::shared_ptr<Settings> settings;
-    std::shared_ptr<Renderer> renderer;
+    std::unique_ptr<Settings> settings;
+    std::unique_ptr<Renderer> renderer;
     std::unique_ptr<Controller> controller;
 
-    std::shared_ptr<Ship> ship;
+    std::unique_ptr<Ship> ship;
 };
 
 #endif

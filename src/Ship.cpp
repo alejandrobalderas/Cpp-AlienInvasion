@@ -34,12 +34,13 @@ void Ship::update()
 {
     if (m_movingRight && dstrect.x < m_settings->getScreenWidth() - dstrect.w)
         dstrect.x += m_settings->getShipSpeed();
-    else if (m_movingLeft && dstrect.x > 0)
+    if (m_movingLeft && dstrect.x > 0)
         dstrect.x -= m_settings->getShipSpeed();
 }
 
 void Ship::moveLeft()
 {
+
     m_movingLeft = true;
 }
 
