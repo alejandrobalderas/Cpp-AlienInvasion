@@ -6,9 +6,9 @@
 
 AlienInvasion::AlienInvasion()
 {
-    settings = std::make_shared<Settings>();
-    renderer = std::make_shared<Renderer>(settings);
-    ship = std::make_unique<Ship>(settings, renderer);
+    settings = std::make_unique<Settings>();
+    renderer = std::make_unique<Renderer>(settings.get());
+    ship = std::make_unique<Ship>(settings.get(), renderer.get());
     controller = std::make_unique<Controller>();
 }
 

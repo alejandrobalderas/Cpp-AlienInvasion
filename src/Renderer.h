@@ -11,16 +11,16 @@ class Ship;
 class Renderer
 {
 public:
-    Renderer(std::shared_ptr<Settings> &settings);
+    Renderer(const Settings *settings);
     ~Renderer();
     void render();
-    SDL_Renderer *getSDLRenderer() { return sdl_renderer; }
-    // void renderShip(Ship *ship);
-    void renderShip(std::shared_ptr<Ship>);
+    SDL_Renderer *getSDLRenderer() const { return sdl_renderer; }
     void renderBackground();
 
+    void tmp();
+
 private:
-    std::shared_ptr<Settings> settings;
+    const Settings *settings;
 
     SDL_Window *sdl_window;
     SDL_Surface *sdl_surface;

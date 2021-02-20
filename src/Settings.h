@@ -18,19 +18,19 @@ private:
 
 public:
     Settings();
-    int getTargetFrameDuration()
+    int getTargetFrameDuration() const
     {
         return target_frame_duration;
     }
-    int getScreenWidth()
+    int getScreenWidth() const
     {
         return SCREEN_WIDTH;
     }
-    int getScreenHeight()
+    int getScreenHeight() const
     {
         return SCREEN_HEIGHT;
     }
-    void getBackgroundColors(int &r, int &g, int &b, int &a)
+    void getBackgroundColors(int &r, int &g, int &b, int &a) const
     {
         r = colorBackgroundR;
         g = colorBackgroundG;
@@ -38,8 +38,8 @@ public:
         a = colorBackgroundAlpha;
     }
 
-    int getShipShapeSize() { return ship_shape_size; }
-    int getShipSpeed() { return ship_speed; }
+    int getShipShapeSize() const { return ship_shape_size; }
+    int getShipSpeed() const { return ship_speed; }
 };
 
 #endif

@@ -2,9 +2,9 @@
 #include <iostream>
 #include "Ship.h"
 
-Ship::Ship(std::shared_ptr<Settings> settings, std::shared_ptr<Renderer> renderer) : m_settings(settings), _renderer(renderer)
+Ship::Ship(const Settings *settings, Renderer *renderer) : m_settings(settings), m_renderer(renderer)
 {
-    rR = _renderer->getSDLRenderer();
+    rR = m_renderer->getSDLRenderer();
     loadTexture();
     loadDstrect();
 }
@@ -32,10 +32,10 @@ void Ship::draw()
 
 void Ship::update()
 {
-    if (m_movingRight)
-        dstrect.x = dstrect.x + m_settings->getShipSpeed();
-    else if (m_movingLeft)
-        dstrect.x = dstrect.x - m_settings->getShipSpeed();
+    if (m_movingRight && dstrect.x < m_settings->getScreenWidth() - dstrect.w)
+        dstrect.x += m_settings->getShipSpeed();
+    else if (m_movingLeft && dstrect.x > 0)
+        dstrect.x -= m_settings->getShipSpeed();
 }
 
 void Ship::moveLeft()

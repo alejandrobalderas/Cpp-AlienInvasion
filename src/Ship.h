@@ -16,8 +16,8 @@ class Ship
 {
 private:
     std::string path_to_image = "../src/images/rocket.png";
-    std::shared_ptr<Settings> m_settings;
-    std::shared_ptr<Renderer> _renderer;
+    const Settings *m_settings;
+    const Renderer *m_renderer;
     SDL_Rect dstrect;
     SDL_Renderer *rR;
 
@@ -31,7 +31,7 @@ private:
 public:
     // Ship(std::shared_ptr<Renderer>);
     Ship(std::shared_ptr<Settings> &settings);
-    Ship(std::shared_ptr<Settings> settings, std::shared_ptr<Renderer> renderer);
+    Ship(const Settings *settings, Renderer *renderer);
     // Ship(std::shared_ptr<Renderer>);
     SDL_Texture *ship_texture;
     void blitme();
