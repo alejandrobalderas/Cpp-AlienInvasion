@@ -11,7 +11,9 @@ AlienInvasion::AlienInvasion()
     // bullet = std::make_shared<Bullet>(this);
     controller = std::make_unique<Controller>();
 
-    alien = std::make_unique<Alien>(this);
+    createFleet();
+
+    // alien = std::make_unique<Alien>(this);
 }
 
 AlienInvasion::~AlienInvasion()
@@ -22,7 +24,6 @@ AlienInvasion::~AlienInvasion()
 void AlienInvasion::updateScreen()
 {
     ship->update();
-    alien->update();
 
     // remove bullets that are out of range
     bullets.erase(
@@ -37,6 +38,11 @@ void AlienInvasion::updateScreen()
     {
         bullet->update();
     }
+
+    for (auto &alien : aliens)
+    {
+        alien->update();
+    }
 }
 
 void AlienInvasion::draw()
@@ -45,10 +51,13 @@ void AlienInvasion::draw()
     SDL_RenderClear(renderer->getSDLRenderer());
     renderer->renderBackground();
     ship->draw();
-    alien->draw();
     for (auto &bullet : bullets)
     {
         bullet->draw();
+    }
+    for (auto &alien : aliens)
+    {
+        alien->draw();
     }
 
     SDL_RenderPresent(renderer->getSDLRenderer());
@@ -81,4 +90,9 @@ void AlienInvasion::fireBullet()
 {
     if (bullets.size() < settings->bullet->getMaxBullets())
         bullets.emplace_back(std::make_unique<Bullet>(this));
+}
+
+void AlienInvasion::createFleet()
+{
+    aliens.emplace_back(std::make_unique<Alien>(this));
 }

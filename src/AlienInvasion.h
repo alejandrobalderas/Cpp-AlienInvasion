@@ -31,12 +31,13 @@ public:
     std::shared_ptr<Ship> ship;
     std::vector<std::unique_ptr<Bullet>> bullets;
 
-    std::unique_ptr<Alien> alien;
-
     bool quitGame = false;
     SDL_Event e;
 
 private:
+    std::vector<std::unique_ptr<Alien>> aliens;
+
+    void createFleet();
 };
 
 #endif
