@@ -4,5 +4,6 @@
 
 Settings::Settings()
 {
-    bulletSettings = std::make_unique<BulletSettings>();
+    bullet = std::make_unique<BulletSettings>();
+    alien = std::make_unique<AlienSettings>();
 }

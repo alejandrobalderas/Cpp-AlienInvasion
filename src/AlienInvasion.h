@@ -1,5 +1,6 @@
 class Bullet;
 class Controller;
+class Alien;
 #ifndef ALIENINVASION_H
 #define ALIENINVASION_H
 
@@ -11,6 +12,7 @@ class Controller;
 #include "Settings.h"
 #include "Ship.h"
 #include "Bullet.h"
+#include "Alien.h"
 
 class AlienInvasion
 {
@@ -28,6 +30,9 @@ public:
 
     std::shared_ptr<Ship> ship;
     std::vector<std::unique_ptr<Bullet>> bullets;
+
+    std::unique_ptr<Alien> alien;
+
     bool quitGame = false;
     SDL_Event e;
 

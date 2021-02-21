@@ -39,7 +39,6 @@ void Ship::update()
 
 void Ship::moveLeft()
 {
-
     m_movingLeft = true;
 }
 

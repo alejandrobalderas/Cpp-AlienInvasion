@@ -27,6 +27,7 @@ private:
     int shapeSize;
     bool m_movingRight{false};
     bool m_movingLeft{false};
+    SDL_Texture *shipTexture;
 
     void loadTexture();
     void loadDstrect();
@@ -34,7 +35,6 @@ private:
 public:
     // Ship(std::shared_ptr<Renderer>);
     Ship(AlienInvasion *game);
-    SDL_Texture *shipTexture;
     void draw();
     void update();
     void moveLeft();

@@ -21,7 +21,7 @@ void Bullet::loadDstrect()
     int x{0};
     int y{0};
 
-    int bulletSize = m_settings->bulletSettings->getBulletShapeSize();
+    int bulletSize = m_settings->bullet->getBulletShapeSize();
     m_ship->getShipPositionForBullet(x, y);
     rRect = {x - bulletSize / 2,
              y - bulletSize,
@@ -36,5 +36,5 @@ void Bullet::draw()
 
 void Bullet::update()
 {
-    rRect.y -= m_settings->bulletSettings->getBulletSpeed();
+    rRect.y -= m_settings->bullet->getBulletSpeed();
 }

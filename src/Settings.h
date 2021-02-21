@@ -15,6 +15,19 @@ public:
     int getMaxBullets() { return maxBulletsAllowed; }
 };
 
+class AlienSettings
+{
+private:
+    int shapeSize{90};
+
+public:
+    int getShapeSize() { return shapeSize; }
+};
+
+class ScreenSettings
+{
+};
+
 class Settings
 {
 private:
@@ -33,7 +46,8 @@ private:
 
 public:
     Settings();
-    std::unique_ptr<BulletSettings> bulletSettings;
+    std::unique_ptr<BulletSettings> bullet;
+    std::unique_ptr<AlienSettings> alien;
     int getTargetFrameDuration() const
     {
         return target_frame_duration;
