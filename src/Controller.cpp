@@ -1,58 +1,61 @@
 #include <iostream>
 #include "Controller.h"
 
-void Controller::handleInput(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit)
+void Controller::handleInput(AlienInvasion *game)
 {
+    SDL_Event *e = &game->e;
     while (SDL_PollEvent(e))
     {
         if (e->type == SDL_QUIT)
         {
-            quit = true;
+            game->quitGame = true;
             break;
         }
         else if (e->type == SDL_KEYDOWN)
         {
-            checkKeyDown(e, ship, quit);
+            checkKeyDown(game);
         }
         else if (e->type == SDL_KEYUP)
         {
-            checkKeyUp(e, ship, quit);
+            checkKeyUp(game);
         }
     }
 }
 
-void Controller::checkKeyDown(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit)
+void Controller::checkKeyDown(AlienInvasion *game)
 {
-    switch (e->key.keysym.sym)
+    switch (game->e.key.keysym.sym)
     {
     case SDLK_q:
         std::cout << "q" << std::endl;
-        quit = true;
+        game->quitGame = true;
         break;
 
     case SDLK_LEFT:
         std::cout << "Left" << std::endl;
-        ship->moveLeft();
+        game->ship->moveLeft();
         break;
 
     case SDLK_RIGHT:
         std::cout << "Right" << std::endl;
-        ship->moveRight();
+        game->ship->moveRight();
         break;
 
     case SDLK_SPACE:
         std::cout << "Space" << std::endl;
+        game->fireBullet();
         break;
     }
 }
-void Controller::checkKeyUp(SDL_Event *e, std::shared_ptr<Ship> &ship, bool &quit)
+
+void Controller::checkKeyUp(AlienInvasion *game)
 {
-    switch (e->key.keysym.sym)
+    switch (game->e.key.keysym.sym)
     {
     case SDLK_LEFT:
     case SDLK_RIGHT:
         std::cout << "Stop moving" << std::endl;
-        ship->stopMoving();
+        game->ship->stopMoving();
         break;
     }
 }
