@@ -21,7 +21,6 @@ void AlienInvasion::updateScreen()
 {
     ship->update();
 
-    // bullet->update();
     // remove bullets that are out of range
     bullets.erase(
         std::remove_if(
@@ -77,5 +76,6 @@ void AlienInvasion::runGame()
 
 void AlienInvasion::fireBullet()
 {
-    bullets.emplace_back(std::make_unique<Bullet>(this));
+    if (bullets.size() < settings->bulletSettings->getMaxBullets())
+        bullets.emplace_back(std::make_unique<Bullet>(this));
 }

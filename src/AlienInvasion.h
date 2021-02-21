@@ -27,7 +27,6 @@ public:
     std::unique_ptr<Controller> controller;
 
     std::shared_ptr<Ship> ship;
-    // std::shared_ptr<Bullet> bullet;
     std::vector<std::unique_ptr<Bullet>> bullets;
     bool quitGame = false;
     SDL_Event e;

@@ -7,10 +7,12 @@ class BulletSettings
 private:
     int bulletSpeed = 5;
     int bulletShapeSize = 20;
+    int maxBulletsAllowed = 5;
 
 public:
     int getBulletShapeSize() { return bulletShapeSize; };
     int getBulletSpeed() { return bulletSpeed; }
+    int getMaxBullets() { return maxBulletsAllowed; }
 };
 
 class Settings

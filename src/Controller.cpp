@@ -27,22 +27,18 @@ void Controller::checkKeyDown(AlienInvasion *game)
     switch (game->e.key.keysym.sym)
     {
     case SDLK_q:
-        std::cout << "q" << std::endl;
         game->quitGame = true;
         break;
 
     case SDLK_LEFT:
-        std::cout << "Left" << std::endl;
         game->ship->moveLeft();
         break;
 
     case SDLK_RIGHT:
-        std::cout << "Right" << std::endl;
         game->ship->moveRight();
         break;
 
     case SDLK_SPACE:
-        std::cout << "Space" << std::endl;
         game->fireBullet();
         break;
     }
@@ -54,7 +50,6 @@ void Controller::checkKeyUp(AlienInvasion *game)
     {
     case SDLK_LEFT:
     case SDLK_RIGHT:
-        std::cout << "Stop moving" << std::endl;
         game->ship->stopMoving();
         break;
     }
