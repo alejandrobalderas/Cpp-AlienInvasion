@@ -5,6 +5,7 @@ class Controller;
 
 #include <iostream>
 #include <memory>
+#include <vector>
 #include "Renderer.h"
 #include "Controller.h"
 #include "Settings.h"
@@ -20,16 +21,18 @@ public:
     void draw();
     void updateScreen();
     void applyDelayIfNeeded(int, int);
+    void fireBullet();
     std::shared_ptr<Settings> settings;
     std::shared_ptr<Renderer> renderer;
     std::unique_ptr<Controller> controller;
 
     std::shared_ptr<Ship> ship;
-    std::shared_ptr<Bullet> bullet;
-
-private:
+    // std::shared_ptr<Bullet> bullet;
+    std::vector<std::unique_ptr<Bullet>> bullets;
     bool quitGame = false;
     SDL_Event e;
+
+private:
 };
 
 #endif

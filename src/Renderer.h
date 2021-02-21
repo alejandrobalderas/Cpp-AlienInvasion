@@ -17,8 +17,6 @@ public:
     SDL_Renderer *getSDLRenderer() const { return sdl_renderer; }
     void renderBackground();
 
-    void tmp();
-
 private:
     // const Settings *settings;
     std::shared_ptr<Settings> settings;

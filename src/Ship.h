@@ -17,13 +17,14 @@ class Renderer;
 class Ship
 {
 private:
-    std::string path_to_image = "./images/rocket.png";
+    std::string pathToImage = "../src/images/rocket.png";
     const std::shared_ptr<Settings> m_settings;
     std::shared_ptr<Renderer> m_renderer;
     SDL_Rect dstrect;
     SDL_Renderer *rR;
 
     int speed{100};
+    int shapeSize;
     bool m_movingRight{false};
     bool m_movingLeft{false};
 
@@ -33,12 +34,13 @@ private:
 public:
     // Ship(std::shared_ptr<Renderer>);
     Ship(AlienInvasion *game);
-    SDL_Texture *ship_texture;
+    SDL_Texture *shipTexture;
     void draw();
     void update();
     void moveLeft();
     void moveRight();
     void stopMoving();
+    void getShipPositionForBullet(int &x, int &y) const;
 };
 
 #endif

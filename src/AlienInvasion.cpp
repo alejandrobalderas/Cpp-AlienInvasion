@@ -1,14 +1,14 @@
 
 #include "SDL2/SDL.h"
 #include "AlienInvasion.h"
+#include <algorithm>
 
 AlienInvasion::AlienInvasion()
 {
     settings = std::make_shared<Settings>();
     renderer = std::make_shared<Renderer>(settings);
-    // ship = std::make_unique<Ship>(settings, renderer);
     ship = std::make_shared<Ship>(this);
-    bullet = std::make_shared<Bullet>(this);
+    // bullet = std::make_shared<Bullet>(this);
     controller = std::make_unique<Controller>();
 }
 
@@ -20,6 +20,21 @@ AlienInvasion::~AlienInvasion()
 void AlienInvasion::updateScreen()
 {
     ship->update();
+
+    // bullet->update();
+    // remove bullets that are out of range
+    bullets.erase(
+        std::remove_if(
+            bullets.begin(), bullets.end(),
+            [](const auto &b) {
+                return b->getYPos() <= 0;
+            }),
+        bullets.end());
+
+    for (auto &bullet : bullets)
+    {
+        bullet->update();
+    }
 }
 
 void AlienInvasion::draw()
@@ -28,6 +43,12 @@ void AlienInvasion::draw()
     SDL_RenderClear(renderer->getSDLRenderer());
     renderer->renderBackground();
     ship->draw();
+    // bullet->draw();
+    for (auto &bullet : bullets)
+    {
+        bullet->draw();
+    }
+
     SDL_RenderPresent(renderer->getSDLRenderer());
     int frame_end = SDL_GetTicks();
     applyDelayIfNeeded(frame_start, frame_end);
@@ -47,8 +68,14 @@ void AlienInvasion::runGame()
     std::cout << "Starting game loop" << std::endl;
     while (!quitGame)
     {
-        controller->handleInput(&e, ship, quitGame);
+        // controller->handleInput(&e, ship, quitGame);
+        controller->handleInput(this);
         updateScreen();
         draw();
     }
+}
+
+void AlienInvasion::fireBullet()
+{
+    bullets.emplace_back(std::make_unique<Bullet>(this));
 }

@@ -4,5 +4,5 @@
 
 Settings::Settings()
 {
-    std::cout << "Setting constructor" << std::endl;
+    bulletSettings = std::make_unique<BulletSettings>();
 }

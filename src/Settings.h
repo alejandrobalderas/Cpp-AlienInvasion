@@ -1,5 +1,18 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
+#include <memory>
+
+class BulletSettings
+{
+private:
+    int bulletSpeed = 5;
+    int bulletShapeSize = 20;
+
+public:
+    int getBulletShapeSize() { return bulletShapeSize; };
+    int getBulletSpeed() { return bulletSpeed; }
+};
+
 class Settings
 {
 private:
@@ -18,6 +31,7 @@ private:
 
 public:
     Settings();
+    std::unique_ptr<BulletSettings> bulletSettings;
     int getTargetFrameDuration() const
     {
         return target_frame_duration;
@@ -41,14 +55,6 @@ public:
     int getShipShapeSize() const { return ship_shape_size; }
     int getShipSpeed() const { return ship_speed; }
     // BulletSettings bulletSettings;
-};
-
-class BulletSettings
-{
-private:
-    float bullet_speed = 1.0;
-
-public:
 };
 
 #endif
