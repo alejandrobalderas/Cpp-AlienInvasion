@@ -94,5 +94,21 @@ void AlienInvasion::fireBullet()
 
 void AlienInvasion::createFleet()
 {
-    aliens.emplace_back(std::make_unique<Alien>(this));
+    int alien_width = settings->alien->getShapeSize();
+    float available_space_x = settings->getScreenWidth() - (2 * alien_width);
+    int number_aliens_x = available_space_x / (1.7 * alien_width);
+
+    // Create first row of aliens
+    for (int i = 0; i < number_aliens_x; i++)
+    {
+        createAlien(i);
+    }
+}
+
+void AlienInvasion::createAlien(int alienNumber)
+{
+    int alien_width = settings->alien->getShapeSize();
+    std::unique_ptr<Alien> a = std::make_unique<Alien>(this);
+    a->setXPos(alien_width + 2 * alien_width * alienNumber);
+    aliens.emplace_back(std::move(a));
 }

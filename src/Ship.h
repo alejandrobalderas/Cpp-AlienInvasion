@@ -39,7 +39,8 @@ public:
     void update();
     void moveLeft();
     void moveRight();
-    void stopMoving();
+    void stopMovingRight();
+    void stopMovingLeft();
     void getShipPositionForBullet(int &x, int &y) const;
 };
 

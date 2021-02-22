@@ -49,8 +49,10 @@ void Controller::checkKeyUp(AlienInvasion *game)
     switch (game->e.key.keysym.sym)
     {
     case SDLK_LEFT:
+        game->ship->stopMovingLeft();
+        break;
     case SDLK_RIGHT:
-        game->ship->stopMoving();
+        game->ship->stopMovingRight();
         break;
     }
 }

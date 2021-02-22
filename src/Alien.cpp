@@ -29,3 +29,8 @@ void Alien::update()
 {
     // rRect.y -= m_game->settings->bullet->getBulletSpeed();
 }
+
+void Alien::setXPos(int x)
+{
+    rRect.x = x;
+}

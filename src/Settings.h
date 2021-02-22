@@ -39,7 +39,8 @@ private:
     int colorBackgroundB{50};
     int colorBackgroundAlpha{255};
 
-    int target_frame_duration{1000 / 60};
+    int target_fps = 80;
+    int target_frame_duration{1000 / target_fps};
 
     int ship_shape_size = 60;
     int ship_speed = 10;

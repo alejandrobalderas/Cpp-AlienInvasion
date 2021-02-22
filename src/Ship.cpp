@@ -47,10 +47,14 @@ void Ship::moveRight()
     m_movingRight = true;
 }
 
-void Ship::stopMoving()
+void Ship::stopMovingRight()
+{
+    m_movingRight = false;
+}
+
+void Ship::stopMovingLeft()
 {
     m_movingLeft = false;
-    m_movingRight = false;
 }
 
 void Ship::getShipPositionForBullet(int &x, int &y) const

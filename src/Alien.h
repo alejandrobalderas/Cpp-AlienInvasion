@@ -24,6 +24,7 @@ private:
 
 public:
     Alien(AlienInvasion *game);
+    void setXPos(int x);
     void draw();
     void update();
 };
