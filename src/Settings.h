@@ -19,9 +19,11 @@ class AlienSettings
 {
 private:
     int shapeSize{90};
+    int maxRowsInFleet{3};
 
 public:
     int getShapeSize() { return shapeSize; }
+    int getMaxRowNumInFleet() { return maxRowsInFleet; };
 };
 
 class ScreenSettings

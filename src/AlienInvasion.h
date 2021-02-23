@@ -38,7 +38,7 @@ private:
     std::vector<std::unique_ptr<Alien>> aliens;
 
     void createFleet();
-    void createAlien(int);
+    void createAlien(int, int);
 };
 
 #endif

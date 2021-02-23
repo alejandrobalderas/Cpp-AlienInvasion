@@ -94,21 +94,30 @@ void AlienInvasion::fireBullet()
 
 void AlienInvasion::createFleet()
 {
-    int alien_width = settings->alien->getShapeSize();
-    float available_space_x = settings->getScreenWidth() - (2 * alien_width);
-    int number_aliens_x = available_space_x / (1.7 * alien_width);
+    int alienShape = settings->alien->getShapeSize();
+    float available_space_x = settings->getScreenWidth() - (2 * alienShape);
+    int number_aliens_x = available_space_x / (2 * alienShape);
 
-    // Create first row of aliens
-    for (int i = 0; i < number_aliens_x; i++)
+    int shipSize = settings->getShipShapeSize();
+    float available_space_y = settings->getScreenHeight() - 3 * alienShape - shipSize;
+    int number_rows = available_space_y / (2 * alienShape);
+
+    // Create full fleat
+    for (int rowNum = 0; rowNum < settings->alien->getMaxRowNumInFleet(); rowNum++)
     {
-        createAlien(i);
+        for (int colNum = 0; colNum < number_aliens_x; colNum++)
+        {
+            createAlien(colNum, rowNum);
+        }
     }
+    // Create first row of aliens
 }
 
-void AlienInvasion::createAlien(int alienNumber)
+void AlienInvasion::createAlien(int alienNumber, int rowNum)
 {
-    int alien_width = settings->alien->getShapeSize();
+    int alienShape = settings->alien->getShapeSize();
     std::unique_ptr<Alien> a = std::make_unique<Alien>(this);
-    a->setXPos(alien_width + 2 * alien_width * alienNumber);
+    a->setXPos(alienShape + 2 * alienShape * alienNumber);
+    a->setYPos(alienShape + 2 * alienShape * rowNum);
     aliens.emplace_back(std::move(a));
 }

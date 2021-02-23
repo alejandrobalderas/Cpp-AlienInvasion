@@ -34,3 +34,7 @@ void Alien::setXPos(int x)
 {
     rRect.x = x;
 }
+void Alien::setYPos(int y)
+{
+    rRect.y = y;
+}
