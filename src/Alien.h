@@ -20,14 +20,24 @@ private:
     void loadTexture();
     void loadDstrect();
 
+    enum direction
+    {
+        right = 1,
+        left = -1
+    };
+    static direction currentDir;
+
     AlienInvasion *m_game;
 
 public:
     Alien(AlienInvasion *game);
+    int getYPos();
     void setXPos(int x);
     void setYPos(int y);
+    bool checkEdges();
     void draw();
     void update();
+    static void changeDirection();
 };
 
 #endif

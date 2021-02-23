@@ -1,5 +1,6 @@
 #include "Alien.h"
 
+Alien::direction Alien::currentDir = right;
 Alien::Alien(AlienInvasion *game) : m_game(game)
 {
     rR = game->renderer->getSDLRenderer();
@@ -28,13 +29,35 @@ void Alien::draw()
 void Alien::update()
 {
     // rRect.y -= m_game->settings->bullet->getBulletSpeed();
+    rRect.x += (m_game->settings->alien->getSpeed() * currentDir);
 }
 
 void Alien::setXPos(int x)
 {
     rRect.x = x;
 }
+int Alien::getYPos()
+{
+    return rRect.y;
+}
 void Alien::setYPos(int y)
 {
     rRect.y = y;
+}
+
+bool Alien::checkEdges()
+{
+    if (rRect.x >= m_game->settings->getScreenWidth() - shapeSize || rRect.x <= 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Alien::changeDirection()
+{
+    currentDir = (currentDir == left ? right : left);
 }

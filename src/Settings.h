@@ -20,10 +20,14 @@ class AlienSettings
 private:
     int shapeSize{90};
     int maxRowsInFleet{3};
+    int speed{2};
+    int dropSpeed{50};
 
 public:
     int getShapeSize() { return shapeSize; }
     int getMaxRowNumInFleet() { return maxRowsInFleet; };
+    int getSpeed() { return speed; };
+    int getDropSpeed() { return dropSpeed; };
 };
 
 class ScreenSettings

@@ -39,6 +39,8 @@ private:
 
     void createFleet();
     void createAlien(int, int);
+    void checkFleetEdges();
+    void changeFleetDirection();
 };
 
 #endif

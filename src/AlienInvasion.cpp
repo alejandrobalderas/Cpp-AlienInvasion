@@ -39,6 +39,7 @@ void AlienInvasion::updateScreen()
         bullet->update();
     }
 
+    checkFleetEdges();
     for (auto &alien : aliens)
     {
         alien->update();
@@ -110,7 +111,6 @@ void AlienInvasion::createFleet()
             createAlien(colNum, rowNum);
         }
     }
-    // Create first row of aliens
 }
 
 void AlienInvasion::createAlien(int alienNumber, int rowNum)
@@ -120,4 +120,26 @@ void AlienInvasion::createAlien(int alienNumber, int rowNum)
     a->setXPos(alienShape + 2 * alienShape * alienNumber);
     a->setYPos(alienShape + 2 * alienShape * rowNum);
     aliens.emplace_back(std::move(a));
+}
+
+void AlienInvasion::checkFleetEdges()
+{
+    for (auto &a : aliens)
+    {
+        if (a->checkEdges())
+        {
+            changeFleetDirection();
+            break;
+        }
+    }
+}
+
+void AlienInvasion::changeFleetDirection()
+{
+    for (auto &a : aliens)
+    {
+        a->setYPos(a->getYPos() + settings->alien->getDropSpeed());
+        Alien::changeDirection();
+        // a->rRect.y += settings->alien->getDropSpeed();
+    }
 }
