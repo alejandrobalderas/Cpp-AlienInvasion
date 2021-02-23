@@ -31,6 +31,7 @@ private:
 
 public:
     Alien(AlienInvasion *game);
+    int getBottomEdge();
     int getYPos();
     void setXPos(int x);
     void setYPos(int y);
@@ -38,6 +39,10 @@ public:
     void draw();
     void update();
     static void changeDirection();
+    void returnLeftRightEdges(int &, int &);
+    void returnTopBottomEdges(int &, int &);
+    SDL_Rect *getRect() { return &rRect; };
+    bool markDelete{false};
 };
 
 #endif

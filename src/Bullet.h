@@ -27,7 +27,11 @@ public:
     void draw();
     void update();
     int getYPos() { return rRect.y; };
+    void returnLeftRightEdges(int &topLeft, int &topRight);
+    void returnTopBottomEdges(int &top, int &bottom);
     SDL_Texture *bulletTexture;
+    SDL_Rect *getRect() { return &rRect; };
+    bool markDelete{false};
 };
 
 #endif

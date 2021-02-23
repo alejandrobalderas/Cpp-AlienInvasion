@@ -8,12 +8,9 @@ AlienInvasion::AlienInvasion()
     settings = std::make_shared<Settings>();
     renderer = std::make_shared<Renderer>(settings);
     ship = std::make_shared<Ship>(this);
-    // bullet = std::make_shared<Bullet>(this);
     controller = std::make_unique<Controller>();
 
     createFleet();
-
-    // alien = std::make_unique<Alien>(this);
 }
 
 AlienInvasion::~AlienInvasion()
@@ -38,6 +35,33 @@ void AlienInvasion::updateScreen()
     {
         bullet->update();
     }
+    for (auto &bullet : bullets)
+    {
+        for (auto &alien : aliens)
+        {
+            if (checkAlienBulletCollision(alien->getRect(), bullet->getRect()))
+            {
+                alien->markDelete = true;
+                bullet->markDelete = true;
+            }
+        }
+    }
+
+    if (!bullets.empty())
+    {
+        bullets.erase(
+            std::remove_if(
+                bullets.begin(), bullets.end(),
+                [](auto &bullet) { return bullet->markDelete; }),
+            bullets.end());
+    }
+    aliens.erase(
+        std::remove_if(
+            aliens.begin(), aliens.end(),
+            [](auto &alien) {
+                return alien->markDelete;
+            }),
+        aliens.end());
 
     checkFleetEdges();
     for (auto &alien : aliens)
@@ -139,7 +163,20 @@ void AlienInvasion::changeFleetDirection()
     for (auto &a : aliens)
     {
         a->setYPos(a->getYPos() + settings->alien->getDropSpeed());
-        Alien::changeDirection();
-        // a->rRect.y += settings->alien->getDropSpeed();
+    }
+    Alien::changeDirection();
+}
+
+bool AlienInvasion::checkAlienBulletCollision(SDL_Rect *alien, SDL_Rect *bullet)
+{
+    bool x_collision = (bullet->x > alien->x && bullet->x + bullet->w < alien->x + alien->w);
+    bool y_collision = (bullet->y < alien->y + alien->h && bullet->y + bullet->h > alien->y);
+    if (x_collision && y_collision)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }

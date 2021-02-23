@@ -38,3 +38,15 @@ void Bullet::update()
 {
     rRect.y -= m_settings->bullet->getBulletSpeed();
 }
+
+void Bullet::returnLeftRightEdges(int &left, int &right)
+{
+    left = rRect.x;
+    right = rRect.x + rRect.w;
+}
+
+void Bullet::returnTopBottomEdges(int &top, int &bottom)
+{
+    top = rRect.y;
+    bottom = rRect.y + rRect.h;
+}

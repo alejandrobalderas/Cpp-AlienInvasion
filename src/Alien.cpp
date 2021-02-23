@@ -47,7 +47,7 @@ void Alien::setYPos(int y)
 
 bool Alien::checkEdges()
 {
-    if (rRect.x >= m_game->settings->getScreenWidth() - shapeSize || rRect.x <= 0)
+    if (rRect.x > m_game->settings->getScreenWidth() - shapeSize || rRect.x < 0)
     {
         return true;
     }
@@ -60,4 +60,15 @@ bool Alien::checkEdges()
 void Alien::changeDirection()
 {
     currentDir = (currentDir == left ? right : left);
+}
+void Alien::returnLeftRightEdges(int &left, int &right)
+{
+    left = rRect.x;
+    right = rRect.x + rRect.w;
+}
+
+void Alien::returnTopBottomEdges(int &top, int &bottom)
+{
+    top = rRect.y;
+    bottom = rRect.y + rRect.h;
 }
