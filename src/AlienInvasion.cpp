@@ -39,7 +39,7 @@ void AlienInvasion::updateScreen()
     {
         for (auto &alien : aliens)
         {
-            if (checkAlienBulletCollision(alien->getRect(), bullet->getRect()))
+            if (Sprite::checkForCollision(bullet.get(), alien.get()))
             {
                 alien->markDelete = true;
                 bullet->markDelete = true;

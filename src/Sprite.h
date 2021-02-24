@@ -14,6 +14,11 @@ public:
     SDL_Rect rRect;
     bool markDelete{false};
     int shapeSize{10};
+    enum movingDirection
+    {
+        right = 1,
+        left = -1
+    };
 
     virtual void draw();
     virtual void update();
@@ -26,11 +31,8 @@ public:
     void setXPos(int x);
     void setYPos(int y);
     void setShapeSize(int size);
-    enum movingDirection
-    {
-        right = 1,
-        left = -1
-    };
+
+    static bool checkForCollision(const Sprite *a, const Sprite *b);
 
 private:
     std::string pathToImage;

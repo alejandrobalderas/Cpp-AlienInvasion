@@ -24,7 +24,6 @@ public:
     void updateScreen();
     void applyDelayIfNeeded(int, int);
     void fireBullet();
-    bool checkAlienBulletCollision(SDL_Rect *alien, SDL_Rect *bullet);
     std::shared_ptr<GameSettings> settings;
     std::shared_ptr<Renderer> renderer;
     std::unique_ptr<Controller> controller;

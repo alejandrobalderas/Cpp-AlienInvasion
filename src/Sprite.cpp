@@ -41,3 +41,10 @@ void Sprite::setYPos(int y)
 {
     rRect.y = y;
 }
+
+bool Sprite::checkForCollision(const Sprite *a, const Sprite *b)
+{
+    bool xCollision = a->rRect.x < b->rRect.x + b->rRect.w && b->rRect.x < a->rRect.x + a->rRect.w;
+    bool yCollision = a->rRect.y < b->rRect.y + b->rRect.h && b->rRect.y < a->rRect.y + a->rRect.h;
+    return xCollision && yCollision;
+}
