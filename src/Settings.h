@@ -5,22 +5,31 @@
 
 class SpriteSettings
 {
-public:
+private:
     std::string pathToImage;
     int shapeSize{10};
+
+public:
+    std::string getPath() { return pathToImage; };
+    void setPath(std::string path) { pathToImage = path; };
+    int getShapeSize() { return shapeSize; };
+    void setShapeSize(int size) { shapeSize = size; };
 };
 
-class BulletSettings : public SpriteSettings
+class BulletSettings
 {
 public:
     int getBulletShapeSize() { return bulletShapeSize; };
     int getBulletSpeed() { return bulletSpeed; }
     int getMaxBullets() { return maxBulletsAllowed; }
+    std::string getPath() { return pathToImage; }
 
 private:
     int bulletSpeed = 5;
     int bulletShapeSize = 20;
     int maxBulletsAllowed = 5;
+
+    std::string pathToImage = "./images/bullet.png";
 };
 
 class AlienSettings : public SpriteSettings
@@ -30,12 +39,26 @@ public:
     int getMaxRowNumInFleet() { return maxRowsInFleet; };
     int getSpeed() { return speed; };
     int getDropSpeed() { return dropSpeed; };
+    std::string getPath() { return path; }
 
 private:
     int shapeSize{90};
     int maxRowsInFleet{3};
     int speed{2};
     int dropSpeed{50};
+    std::string path = "./images/ufo.png";
+};
+class ShipSettings
+{
+public:
+    int getShapeSize() const { return shapeSize; }
+    int getShipSpeed() const { return shipSpeed; }
+    std::string getImagePath() { return path; }
+
+private:
+    int shapeSize = 60;
+    int shipSpeed = 10;
+    std::string path = "./images/rocket.png";
 };
 
 class ScreenSettings
@@ -61,17 +84,6 @@ private:
     int colorBackgroundAlpha{255};
     int target_fps = 80;
     int target_frame_duration{1000 / target_fps};
-};
-
-class ShipSettings
-{
-public:
-    int getShipShapeSize() const { return ship_shape_size; }
-    int getShipSpeed() const { return ship_speed; }
-
-private:
-    int ship_shape_size = 60;
-    int ship_speed = 10;
 };
 
 class GameSettings

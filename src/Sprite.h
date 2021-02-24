@@ -1,18 +1,17 @@
-class AlienInvasion;
-
 #ifndef SPRITE_H
 #define SPRITE_H
 
 #include <string>
 #include "SDL2/SDL.h"
-
-#include "AlienInvasion.h"
+#include "SDL2/SDL_image.h"
 
 class Sprite
 {
 public:
-    Sprite(AlienInvasion *game, SpriteSettings *settings);
+    Sprite(SDL_Renderer *renderer, std::string pathToImage);
+    // virtual ~Sprite();
     SDL_Texture *texture;
+    SDL_Rect rRect;
     bool markDelete{false};
     int shapeSize{10};
 
@@ -26,6 +25,7 @@ public:
     int getHeight() { return rRect.h; };
     void setXPos(int x);
     void setYPos(int y);
+    void setShapeSize(int size);
 
 private:
     enum movingDirection
@@ -35,8 +35,7 @@ private:
     };
     std::string pathToImage;
     SDL_Renderer *renderer;
-    SDL_Rect rRect;
-    const std::shared_ptr<GameSettings> settings;
+    // const std::shared_ptr<GameSettings> settings;
 
     void loadTexture();
     void loadDstrect();

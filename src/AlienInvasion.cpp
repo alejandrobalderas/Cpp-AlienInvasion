@@ -123,7 +123,7 @@ void AlienInvasion::createFleet()
     float available_space_x = settings->screen->getScreenWidth() - (2 * alienShape);
     int number_aliens_x = available_space_x / (2 * alienShape);
 
-    int shipSize = settings->ship->getShipShapeSize();
+    int shipSize = settings->ship->getShapeSize();
     float available_space_y = settings->screen->getScreenHeight() - 3 * alienShape - shipSize;
     int number_rows = available_space_y / (2 * alienShape);
 

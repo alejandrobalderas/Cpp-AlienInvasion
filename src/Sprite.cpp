@@ -1,11 +1,9 @@
 
 #include "Sprite.h"
-
-Sprite::Sprite(AlienInvasion *game, SpriteSettings *settings) : renderer(game->renderer->getSDLRenderer())
+#include <iostream>
+Sprite::Sprite(SDL_Renderer *renderer, std::string pathToImage)
+    : renderer(renderer), pathToImage(pathToImage)
 {
-
-    pathToImage = settings->pathToImage;
-    shapeSize = settings->shapeSize;
     loadTexture();
     loadDstrect();
 }
@@ -19,8 +17,27 @@ void Sprite::loadTexture()
 
 void Sprite::loadDstrect()
 {
-    rRect = {settings->screen->getScreenWidth() / 2,
-             settings->screen->getScreenHeight() / 2,
-             shapeSize,
-             shapeSize};
+    // Default values
+    rRect = {100, 100, shapeSize, shapeSize};
+}
+
+void Sprite::draw() {}
+// {
+// }
+void Sprite::update() {}
+
+void Sprite::setShapeSize(int size)
+{
+    shapeSize = size;
+    rRect.w = shapeSize;
+    rRect.h = shapeSize;
+}
+void Sprite::setXPos(int x)
+{
+    rRect.x = x;
+}
+
+void Sprite::setYPos(int y)
+{
+    rRect.y = y;
 }

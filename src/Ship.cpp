@@ -1,40 +1,41 @@
 #include <iostream>
 #include "Ship.h"
+#include "AlienInvasion.h"
 
-Ship::Ship(AlienInvasion *game) : settings(game->settings), renderer(game->renderer)
+Ship::Ship(AlienInvasion *game)
+    : game(game),
+      rR(game->renderer->getSDLRenderer()),
+      Sprite(game->renderer->getSDLRenderer(), game->settings->ship->getImagePath())
 {
-    rR = renderer->getSDLRenderer();
-    shapeSize = settings->ship->getShipShapeSize();
-    loadTexture();
-    loadDstrect();
+    std::cout << "New constr ship" << std::endl;
+    settings = game->settings.get();
+    screenWidth = settings->screen->getScreenWidth();
+    screenHeight = settings->screen->getScreenHeight();
+    shapeSize = settings->ship->getShapeSize();
+    setInitialPos();
+}
+Ship::~Ship()
+{
 }
 
-void Ship::loadTexture()
+void Ship::setInitialPos()
 {
-    SDL_Surface *img = IMG_Load(pathToImage.c_str());
-    shipTexture = SDL_CreateTextureFromSurface(rR, img);
-    SDL_FreeSurface(img);
-}
-
-void Ship::loadDstrect()
-{
-    dstrect = {settings->screen->getScreenWidth() / 2 - shapeSize / 2,
-               settings->screen->getScreenHeight() - shapeSize,
-               shapeSize,
-               shapeSize};
+    setXPos(screenWidth / 2);
+    setYPos(screenHeight - shapeSize);
+    setShapeSize(shapeSize);
 }
 
 void Ship::draw()
 {
-    SDL_RenderCopy(rR, shipTexture, NULL, &dstrect);
+    SDL_RenderCopy(rR, texture, NULL, &rRect);
 }
 
 void Ship::update()
 {
-    if (m_movingRight && dstrect.x < settings->screen->getScreenWidth() - dstrect.w)
-        dstrect.x += settings->ship->getShipSpeed();
-    if (m_movingLeft && dstrect.x > 0)
-        dstrect.x -= settings->ship->getShipSpeed();
+    if (m_movingRight && rRect.x < settings->screen->getScreenWidth() - rRect.w)
+        rRect.x += settings->ship->getShipSpeed();
+    if (m_movingLeft && rRect.x > 0)
+        rRect.x -= settings->ship->getShipSpeed();
 }
 
 void Ship::moveLeft()
@@ -59,6 +60,6 @@ void Ship::stopMovingLeft()
 
 void Ship::getShipPositionForBullet(int &x, int &y) const
 {
-    x = dstrect.x + shapeSize / 2;
-    y = dstrect.y;
+    x = rRect.x + shapeSize / 2;
+    y = rRect.y;
 }
