@@ -9,7 +9,6 @@ AlienInvasion::AlienInvasion()
     renderer = std::make_shared<Renderer>(settings);
     ship = std::make_shared<Ship>(this);
     controller = std::make_unique<Controller>();
-
     createFleet();
 }
 
@@ -17,24 +16,37 @@ AlienInvasion::~AlienInvasion()
 {
 }
 
+void AlienInvasion::runGame()
+{
+    std::cout << "Starting game loop" << std::endl;
+    while (!quitGame)
+    {
+        controller->handleInput(this);
+        updateScreen();
+        draw();
+    }
+}
+
 // Updates all images on screen
 void AlienInvasion::updateScreen()
 {
+    checkFleetEdges();
+    moveObjects();
+    checkForCollision();
+    removeObjects();
+}
+
+void AlienInvasion::moveObjects()
+{
     ship->update();
-
-    // remove bullets that are out of range
-    bullets.erase(
-        std::remove_if(
-            bullets.begin(), bullets.end(),
-            [](const auto &b) {
-                return b->getYPos() <= 0;
-            }),
-        bullets.end());
-
     for (auto &bullet : bullets)
-    {
         bullet->update();
-    }
+    for (auto &alien : aliens)
+        alien->update();
+}
+
+void AlienInvasion::checkForCollision()
+{
     for (auto &bullet : bullets)
     {
         for (auto &alien : aliens)
@@ -46,15 +58,16 @@ void AlienInvasion::updateScreen()
             }
         }
     }
+}
 
-    if (!bullets.empty())
-    {
-        bullets.erase(
-            std::remove_if(
-                bullets.begin(), bullets.end(),
-                [](auto &bullet) { return bullet->markDelete; }),
-            bullets.end());
-    }
+void AlienInvasion::removeObjects()
+{
+    bullets.erase(
+        std::remove_if(
+            bullets.begin(), bullets.end(),
+            [](auto &bullet) { return bullet->markDelete || bullet->getYPos() <= 0; }),
+        bullets.end());
+    // }
     aliens.erase(
         std::remove_if(
             aliens.begin(), aliens.end(),
@@ -62,12 +75,6 @@ void AlienInvasion::updateScreen()
                 return alien->markDelete;
             }),
         aliens.end());
-
-    checkFleetEdges();
-    for (auto &alien : aliens)
-    {
-        alien->update();
-    }
 }
 
 void AlienInvasion::draw()
@@ -77,14 +84,9 @@ void AlienInvasion::draw()
     renderer->renderBackground();
     ship->draw();
     for (auto &bullet : bullets)
-    {
         bullet->draw();
-    }
     for (auto &alien : aliens)
-    {
         alien->draw();
-    }
-
     SDL_RenderPresent(renderer->getSDLRenderer());
     int frame_end = SDL_GetTicks();
     applyDelayIfNeeded(frame_start, frame_end);
@@ -96,18 +98,6 @@ void AlienInvasion::applyDelayIfNeeded(int frame_start, int frame_end)
     if (frame_duration < settings->screen->getTargetFrameDuration())
     {
         SDL_Delay(settings->screen->getTargetFrameDuration() - frame_duration);
-    }
-}
-
-void AlienInvasion::runGame()
-{
-    std::cout << "Starting game loop" << std::endl;
-    while (!quitGame)
-    {
-        // controller->handleInput(&e, ship, quitGame);
-        controller->handleInput(this);
-        updateScreen();
-        draw();
     }
 }
 
@@ -169,18 +159,4 @@ void AlienInvasion::changeFleetDirection()
         a->setYPos(a->getYPos() + settings->alien->getDropSpeed());
     }
     Alien::changeDirection();
-}
-
-bool AlienInvasion::checkAlienBulletCollision(SDL_Rect *alien, SDL_Rect *bullet)
-{
-    bool x_collision = (bullet->x > alien->x && bullet->x + bullet->w < alien->x + alien->w);
-    bool y_collision = (bullet->y < alien->y + alien->h && bullet->y + bullet->h > alien->y);
-    if (x_collision && y_collision)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }

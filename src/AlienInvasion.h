@@ -41,6 +41,9 @@ private:
     void createAlien(int, int);
     void checkFleetEdges();
     void changeFleetDirection();
+    void removeObjects();
+    void checkForCollision();
+    void moveObjects();
 };
 
 #endif
