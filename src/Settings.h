@@ -3,26 +3,13 @@
 #include <memory>
 #include <string>
 
-class SpriteSettings
-{
-private:
-    std::string pathToImage;
-    int shapeSize{10};
-
-public:
-    std::string getPath() { return pathToImage; };
-    void setPath(std::string path) { pathToImage = path; };
-    int getShapeSize() { return shapeSize; };
-    void setShapeSize(int size) { shapeSize = size; };
-};
-
 class BulletSettings
 {
 public:
     int getBulletShapeSize() { return bulletShapeSize; };
     int getBulletSpeed() { return bulletSpeed; }
     int getMaxBullets() { return maxBulletsAllowed; }
-    std::string getPath() { return pathToImage; }
+    std::string getImagePath() { return pathToImage; }
 
 private:
     int bulletSpeed = 5;
@@ -32,21 +19,21 @@ private:
     std::string pathToImage = "./images/bullet.png";
 };
 
-class AlienSettings : public SpriteSettings
+class AlienSettings
 {
 public:
     int getShapeSize() { return shapeSize; }
     int getMaxRowNumInFleet() { return maxRowsInFleet; };
     int getSpeed() { return speed; };
     int getDropSpeed() { return dropSpeed; };
-    std::string getPath() { return path; }
+    std::string getImagePath() { return pathToImage; }
 
 private:
     int shapeSize{90};
     int maxRowsInFleet{3};
     int speed{2};
     int dropSpeed{50};
-    std::string path = "./images/ufo.png";
+    std::string pathToImage = "./images/ufo.png";
 };
 class ShipSettings
 {

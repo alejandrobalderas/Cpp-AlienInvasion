@@ -7,11 +7,10 @@ Ship::Ship(AlienInvasion *game)
       rR(game->renderer->getSDLRenderer()),
       Sprite(game->renderer->getSDLRenderer(), game->settings->ship->getImagePath())
 {
-    std::cout << "New constr ship" << std::endl;
     settings = game->settings.get();
     screenWidth = settings->screen->getScreenWidth();
     screenHeight = settings->screen->getScreenHeight();
-    shapeSize = settings->ship->getShapeSize();
+    setShapeSize(settings->ship->getShapeSize());
     setInitialPos();
 }
 Ship::~Ship()
@@ -22,7 +21,6 @@ void Ship::setInitialPos()
 {
     setXPos(screenWidth / 2);
     setYPos(screenHeight - shapeSize);
-    setShapeSize(shapeSize);
 }
 
 void Ship::draw()

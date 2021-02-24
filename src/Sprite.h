@@ -26,13 +26,13 @@ public:
     void setXPos(int x);
     void setYPos(int y);
     void setShapeSize(int size);
-
-private:
     enum movingDirection
     {
         right = 1,
         left = -1
     };
+
+private:
     std::string pathToImage;
     SDL_Renderer *renderer;
     // const std::shared_ptr<GameSettings> settings;

@@ -31,7 +31,6 @@ private:
     // Variables
     SDL_Renderer *rR;
     int speed{100};
-    int shapeSize;
     bool m_movingRight{false};
     bool m_movingLeft{false};
     AlienInvasion *game;
@@ -40,8 +39,6 @@ private:
     int screenHeight;
 
     // Methods
-    void loadTexture();
-    void loadDstrect();
     void setInitialPos();
 };
 
