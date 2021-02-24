@@ -11,7 +11,7 @@ class AlienInvasion;
 class Sprite
 {
 public:
-    Sprite(AlienInvasion *game);
+    Sprite(AlienInvasion *game, SpriteSettings *settings);
     SDL_Texture *texture;
     bool markDelete{false};
     int shapeSize{10};
@@ -24,12 +24,19 @@ public:
     int getXPos() { return rRect.x; };
     int getWidth() { return rRect.w; };
     int getHeight() { return rRect.h; };
+    void setXPos(int x);
+    void setYPos(int y);
 
 private:
+    enum movingDirection
+    {
+        right = 1,
+        left = -1
+    };
     std::string pathToImage;
     SDL_Renderer *renderer;
     SDL_Rect rRect;
-    const std::shared_ptr<Settings> settings;
+    const std::shared_ptr<GameSettings> settings;
 
     void loadTexture();
     void loadDstrect();

@@ -1,8 +1,16 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 #include <memory>
+#include <string>
 
-class BulletSettings
+class SpriteSettings
+{
+public:
+    std::string pathToImage;
+    int shapeSize{10};
+};
+
+class BulletSettings : public SpriteSettings
 {
 public:
     int getBulletShapeSize() { return bulletShapeSize; };
@@ -15,7 +23,7 @@ private:
     int maxBulletsAllowed = 5;
 };
 
-class AlienSettings
+class AlienSettings : public SpriteSettings
 {
 public:
     int getShapeSize() { return shapeSize; }
@@ -66,10 +74,10 @@ private:
     int ship_speed = 10;
 };
 
-class Settings
+class GameSettings
 {
 public:
-    Settings();
+    GameSettings();
     std::unique_ptr<ScreenSettings> screen;
     std::unique_ptr<BulletSettings> bullet;
     std::unique_ptr<AlienSettings> alien;

@@ -1,8 +1,11 @@
 
 #include "Sprite.h"
 
-Sprite::Sprite(AlienInvasion *game) : renderer(game->renderer->getSDLRenderer())
+Sprite::Sprite(AlienInvasion *game, SpriteSettings *settings) : renderer(game->renderer->getSDLRenderer())
 {
+
+    pathToImage = settings->pathToImage;
+    shapeSize = settings->shapeSize;
     loadTexture();
     loadDstrect();
 }

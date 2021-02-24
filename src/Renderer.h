@@ -12,7 +12,7 @@ class Renderer
 {
 public:
     // Constructor
-    Renderer(const std::shared_ptr<Settings> settings);
+    Renderer(const std::shared_ptr<GameSettings> settings);
     ~Renderer();
     // Variables
     SDL_Renderer *getSDLRenderer() const { return sdl_renderer; }
@@ -22,7 +22,7 @@ public:
 
 private:
     // Variables
-    std::shared_ptr<Settings> settings;
+    std::shared_ptr<GameSettings> settings;
     SDL_Window *sdl_window;
     SDL_Surface *sdl_surface;
     SDL_Renderer *sdl_renderer;

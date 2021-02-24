@@ -33,7 +33,7 @@ private:
     std::string pathToImage = "./images/bullet.png";
     SDL_Rect rRect;
     const Ship *m_ship;
-    const std::shared_ptr<Settings> settings;
+    const std::shared_ptr<GameSettings> settings;
     std::shared_ptr<Renderer> renderer;
     SDL_Renderer *rR;
 

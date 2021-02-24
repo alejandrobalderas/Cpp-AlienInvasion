@@ -5,7 +5,7 @@
 
 AlienInvasion::AlienInvasion()
 {
-    settings = std::make_shared<Settings>();
+    settings = std::make_shared<GameSettings>();
     renderer = std::make_shared<Renderer>(settings);
     ship = std::make_shared<Ship>(this);
     controller = std::make_unique<Controller>();

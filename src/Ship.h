@@ -32,7 +32,7 @@ public:
 private:
     // Variables
     std::string pathToImage = "../src/images/rocket.png";
-    const std::shared_ptr<Settings> settings;
+    const std::shared_ptr<GameSettings> settings;
     std::shared_ptr<Renderer> renderer;
     SDL_Rect dstrect;
     SDL_Renderer *rR;

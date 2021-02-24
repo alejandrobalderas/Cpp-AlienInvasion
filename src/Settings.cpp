@@ -2,7 +2,7 @@
 #include "Settings.h"
 #include <iostream>
 
-Settings::Settings()
+GameSettings::GameSettings()
 {
     screen = std::make_unique<ScreenSettings>();
     bullet = std::make_unique<BulletSettings>();
