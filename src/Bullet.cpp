@@ -12,11 +12,6 @@ Bullet::Bullet(int x, int y, AlienInvasion *game)
     bulletSpeed = game->settings->bullet->getBulletSpeed();
 }
 
-void Bullet::draw()
-{
-    SDL_RenderCopy(rR, texture, NULL, &rRect);
-}
-
 void Bullet::update()
 {
     rRect.y -= bulletSpeed;

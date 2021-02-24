@@ -12,10 +12,6 @@ Alien::Alien(AlienInvasion *game)
     screenHeight = settings->screen->getScreenHeight();
     setShapeSize(settings->alien->getShapeSize());
 }
-void Alien::draw()
-{
-    SDL_RenderCopy(rR, texture, NULL, &rRect);
-}
 
 void Alien::update()
 {

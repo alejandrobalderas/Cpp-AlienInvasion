@@ -20,7 +20,7 @@ public:
         left = -1
     };
 
-    virtual void draw();
+    void draw();
     virtual void update();
 
     SDL_Rect *getRect() { return &rRect; };

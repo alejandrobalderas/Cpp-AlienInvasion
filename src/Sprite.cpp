@@ -21,9 +21,10 @@ void Sprite::loadDstrect()
     rRect = {100, 100, shapeSize, shapeSize};
 }
 
-void Sprite::draw() {}
-// {
-// }
+void Sprite::draw()
+{
+    SDL_RenderCopy(renderer, texture, NULL, &rRect);
+}
 void Sprite::update() {}
 
 void Sprite::setShapeSize(int size)

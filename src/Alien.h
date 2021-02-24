@@ -15,7 +15,7 @@ public:
 
     // Variables
     // Functions
-    void draw() override;
+    // void draw();
     void update() override;
     bool checkEdges();
     static void changeDirection();

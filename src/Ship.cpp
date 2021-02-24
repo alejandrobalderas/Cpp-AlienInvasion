@@ -23,11 +23,6 @@ void Ship::setInitialPos()
     setYPos(screenHeight - shapeSize);
 }
 
-void Ship::draw()
-{
-    SDL_RenderCopy(rR, texture, NULL, &rRect);
-}
-
 void Ship::update()
 {
     if (m_movingRight && rRect.x < settings->screen->getScreenWidth() - rRect.w)

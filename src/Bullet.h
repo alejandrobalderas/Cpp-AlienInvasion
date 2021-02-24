@@ -17,7 +17,7 @@ public:
 
     // Variables
     // Methods
-    void draw() override;
+    // void draw();
     void update() override;
     // Getters / Setters
 

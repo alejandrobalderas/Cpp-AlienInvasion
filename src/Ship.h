@@ -18,7 +18,7 @@ public:
     // Variables
 
     // Methods
-    void draw() override;
+    // void draw();
     void update() override;
     void moveLeft();
     void moveRight();
