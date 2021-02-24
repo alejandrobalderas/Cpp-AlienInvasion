@@ -12,8 +12,6 @@ class Renderer;
 #include "Settings.h"
 #include "Renderer.h"
 
-//Forward declaration or Renderer
-
 class Ship
 {
 public:
@@ -34,8 +32,8 @@ public:
 private:
     // Variables
     std::string pathToImage = "../src/images/rocket.png";
-    const std::shared_ptr<Settings> m_settings;
-    std::shared_ptr<Renderer> m_renderer;
+    const std::shared_ptr<Settings> settings;
+    std::shared_ptr<Renderer> renderer;
     SDL_Rect dstrect;
     SDL_Renderer *rR;
     int speed{100};

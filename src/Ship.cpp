@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Ship.h"
 
-Ship::Ship(AlienInvasion *game) : m_settings(game->settings), m_renderer(game->renderer)
+Ship::Ship(AlienInvasion *game) : settings(game->settings), renderer(game->renderer)
 {
-    rR = m_renderer->getSDLRenderer();
-    shapeSize = m_settings->ship->getShipShapeSize();
+    rR = renderer->getSDLRenderer();
+    shapeSize = settings->ship->getShipShapeSize();
     loadTexture();
     loadDstrect();
 }
@@ -18,8 +18,8 @@ void Ship::loadTexture()
 
 void Ship::loadDstrect()
 {
-    dstrect = {m_settings->screen->getScreenWidth() / 2 - shapeSize / 2,
-               m_settings->screen->getScreenHeight() - shapeSize,
+    dstrect = {settings->screen->getScreenWidth() / 2 - shapeSize / 2,
+               settings->screen->getScreenHeight() - shapeSize,
                shapeSize,
                shapeSize};
 }
@@ -31,10 +31,10 @@ void Ship::draw()
 
 void Ship::update()
 {
-    if (m_movingRight && dstrect.x < m_settings->screen->getScreenWidth() - dstrect.w)
-        dstrect.x += m_settings->ship->getShipSpeed();
+    if (m_movingRight && dstrect.x < settings->screen->getScreenWidth() - dstrect.w)
+        dstrect.x += settings->ship->getShipSpeed();
     if (m_movingLeft && dstrect.x > 0)
-        dstrect.x -= m_settings->ship->getShipSpeed();
+        dstrect.x -= settings->ship->getShipSpeed();
 }
 
 void Ship::moveLeft()

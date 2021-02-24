@@ -1,9 +1,9 @@
 #include <iostream>
 #include "Bullet.h"
 
-Bullet::Bullet(AlienInvasion *game) : m_settings(game->settings), m_renderer(game->renderer), m_ship(game->ship.get())
+Bullet::Bullet(AlienInvasion *game) : settings(game->settings), renderer(game->renderer), m_ship(game->ship.get())
 {
-    rR = m_renderer->getSDLRenderer();
+    rR = renderer->getSDLRenderer();
     loadTexture();
     loadDstrect();
 }
@@ -21,7 +21,7 @@ void Bullet::loadDstrect()
     int x{0};
     int y{0};
 
-    int bulletSize = m_settings->bullet->getBulletShapeSize();
+    int bulletSize = settings->bullet->getBulletShapeSize();
     m_ship->getShipPositionForBullet(x, y);
     rRect = {x - bulletSize / 2,
              y - bulletSize,
@@ -36,7 +36,7 @@ void Bullet::draw()
 
 void Bullet::update()
 {
-    rRect.y -= m_settings->bullet->getBulletSpeed();
+    rRect.y -= settings->bullet->getBulletSpeed();
 }
 
 void Bullet::returnLeftRightEdges(int &left, int &right)
