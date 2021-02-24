@@ -30,7 +30,6 @@ public:
 private:
     // Variables
     SDL_Renderer *rR;
-    int speed{100};
     bool m_movingRight{false};
     bool m_movingLeft{false};
     AlienInvasion *game;

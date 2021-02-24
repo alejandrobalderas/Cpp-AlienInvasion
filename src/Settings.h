@@ -6,16 +6,15 @@
 class BulletSettings
 {
 public:
-    int getBulletShapeSize() { return bulletShapeSize; };
+    int getShapeSize() { return shapeSize; };
     int getBulletSpeed() { return bulletSpeed; }
     int getMaxBullets() { return maxBulletsAllowed; }
     std::string getImagePath() { return pathToImage; }
 
 private:
     int bulletSpeed = 5;
-    int bulletShapeSize = 20;
+    int shapeSize = 15;
     int maxBulletsAllowed = 5;
-
     std::string pathToImage = "./images/bullet.png";
 };
 
@@ -29,7 +28,7 @@ public:
     std::string getImagePath() { return pathToImage; }
 
 private:
-    int shapeSize{90};
+    int shapeSize{70};
     int maxRowsInFleet{3};
     int speed{2};
     int dropSpeed{50};

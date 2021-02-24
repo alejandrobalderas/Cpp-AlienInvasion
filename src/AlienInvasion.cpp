@@ -114,7 +114,11 @@ void AlienInvasion::runGame()
 void AlienInvasion::fireBullet()
 {
     if (bullets.size() < settings->bullet->getMaxBullets())
-        bullets.emplace_back(std::make_unique<Bullet>(this));
+    {
+        int x, y;
+        ship->getShipPositionForBullet(x, y);
+        bullets.emplace_back(std::make_unique<Bullet>(x, y, this));
+    }
 }
 
 void AlienInvasion::createFleet()

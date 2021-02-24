@@ -58,6 +58,6 @@ void Ship::stopMovingLeft()
 
 void Ship::getShipPositionForBullet(int &x, int &y) const
 {
-    x = rRect.x + shapeSize / 2;
+    x = rRect.x + rRect.w / 2 - settings->bullet->getShapeSize() / 4;
     y = rRect.y;
 }
