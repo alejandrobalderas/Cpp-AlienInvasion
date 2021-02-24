@@ -16,8 +16,8 @@ void Alien::loadTexture()
 }
 void Alien::loadDstrect()
 {
-    rRect = {m_game->settings->getScreenWidth() / 2 - shapeSize / 2,
-             m_game->settings->getScreenHeight() / 2 - shapeSize,
+    rRect = {m_game->settings->screen->getScreenWidth() / 2 - shapeSize / 2,
+             m_game->settings->screen->getScreenHeight() / 2 - shapeSize,
              shapeSize,
              shapeSize};
 }
@@ -28,7 +28,6 @@ void Alien::draw()
 
 void Alien::update()
 {
-    // rRect.y -= m_game->settings->bullet->getBulletSpeed();
     rRect.x += (m_game->settings->alien->getSpeed() * currentDir);
 }
 
@@ -47,7 +46,7 @@ void Alien::setYPos(int y)
 
 bool Alien::checkEdges()
 {
-    if (rRect.x > m_game->settings->getScreenWidth() - shapeSize || rRect.x < 0)
+    if (rRect.x > m_game->settings->screen->getScreenWidth() - shapeSize || rRect.x < 0)
     {
         return true;
     }

@@ -6,8 +6,6 @@
 Renderer::Renderer(const std::shared_ptr<Settings> settings) : settings(settings)
 {
     init();
-    // Load ship
-    ship_surface = IMG_Load("../src/images/rocket.png");
 };
 Renderer::~Renderer()
 {
@@ -26,8 +24,8 @@ void Renderer::init()
     else
     {
         sdl_window = SDL_CreateWindow("Alien Invasion", SDL_WINDOWPOS_CENTERED,
-                                      SDL_WINDOWPOS_CENTERED, settings->getScreenWidth(),
-                                      settings->getScreenHeight(), SDL_WINDOW_SHOWN);
+                                      SDL_WINDOWPOS_CENTERED, settings->screen->getScreenWidth(),
+                                      settings->screen->getScreenHeight(), SDL_WINDOW_SHOWN);
         if (sdl_window == NULL)
         {
             std::cerr << "Window could not be created.\n";
@@ -45,27 +43,12 @@ void Renderer::init()
     }
 }
 
-// void Renderer::renderShip(std::shared_ptr<Ship> ship)
-// {
-//     ship->draw(sdl_renderer);
-// }
-
 void Renderer::renderBackground()
 {
     int BackgroundR{0};
     int BackgroundG{0};
     int BackgroundB{0};
     int BackgroundA{0};
-    settings->getBackgroundColors(BackgroundR, BackgroundG, BackgroundB, BackgroundA);
+    settings->screen->getBackgroundColors(BackgroundR, BackgroundG, BackgroundB, BackgroundA);
     SDL_SetRenderDrawColor(sdl_renderer, BackgroundR, BackgroundG, BackgroundB, BackgroundA);
-}
-
-void Renderer::render()
-{
-    // Clear screen
-    SDL_RenderClear(sdl_renderer);
-
-    renderBackground();
-
-    SDL_RenderPresent(sdl_renderer);
 }

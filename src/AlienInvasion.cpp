@@ -93,9 +93,9 @@ void AlienInvasion::draw()
 void AlienInvasion::applyDelayIfNeeded(int frame_start, int frame_end)
 {
     int frame_duration = frame_end - frame_start;
-    if (frame_duration < settings->getTargetFrameDuration())
+    if (frame_duration < settings->screen->getTargetFrameDuration())
     {
-        SDL_Delay(settings->getTargetFrameDuration() - frame_duration);
+        SDL_Delay(settings->screen->getTargetFrameDuration() - frame_duration);
     }
 }
 
@@ -120,11 +120,11 @@ void AlienInvasion::fireBullet()
 void AlienInvasion::createFleet()
 {
     int alienShape = settings->alien->getShapeSize();
-    float available_space_x = settings->getScreenWidth() - (2 * alienShape);
+    float available_space_x = settings->screen->getScreenWidth() - (2 * alienShape);
     int number_aliens_x = available_space_x / (2 * alienShape);
 
-    int shipSize = settings->getShipShapeSize();
-    float available_space_y = settings->getScreenHeight() - 3 * alienShape - shipSize;
+    int shipSize = settings->ship->getShipShapeSize();
+    float available_space_y = settings->screen->getScreenHeight() - 3 * alienShape - shipSize;
     int number_rows = available_space_y / (2 * alienShape);
 
     // Create full fleat

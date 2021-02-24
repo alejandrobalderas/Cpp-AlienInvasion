@@ -11,22 +11,23 @@ class Ship;
 class Renderer
 {
 public:
+    // Constructor
     Renderer(const std::shared_ptr<Settings> settings);
     ~Renderer();
-    void render();
+    // Variables
     SDL_Renderer *getSDLRenderer() const { return sdl_renderer; }
+
+    // Methods
     void renderBackground();
 
 private:
-    // const Settings *settings;
+    // Variables
     std::shared_ptr<Settings> settings;
-
     SDL_Window *sdl_window;
     SDL_Surface *sdl_surface;
     SDL_Renderer *sdl_renderer;
 
-    SDL_Surface *ship_surface;
-
+    // Methods
     void init();
 };
 

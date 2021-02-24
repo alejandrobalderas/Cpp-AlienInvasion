@@ -11,7 +11,25 @@ class AlienInvasion;
 
 class Bullet
 {
+public:
+    // Constructor
+    Bullet(AlienInvasion *game);
+
+    // Variables
+    SDL_Texture *bulletTexture;
+    SDL_Rect *getRect() { return &rRect; };
+    bool markDelete{false};
+
+    // Methods
+    void draw();
+    void update();
+    // Getters / Setters
+    int getYPos() { return rRect.y; };
+    void returnLeftRightEdges(int &topLeft, int &topRight);
+    void returnTopBottomEdges(int &top, int &bottom);
+
 private:
+    // Variables
     std::string pathToImage = "./images/bullet.png";
     SDL_Rect rRect;
     const Ship *m_ship;
@@ -19,19 +37,9 @@ private:
     std::shared_ptr<Renderer> m_renderer;
     SDL_Renderer *rR;
 
+    // Functions
     void loadTexture();
     void loadDstrect();
-
-public:
-    Bullet(AlienInvasion *game);
-    void draw();
-    void update();
-    int getYPos() { return rRect.y; };
-    void returnLeftRightEdges(int &topLeft, int &topRight);
-    void returnTopBottomEdges(int &top, int &bottom);
-    SDL_Texture *bulletTexture;
-    SDL_Rect *getRect() { return &rRect; };
-    bool markDelete{false};
 };
 
 #endif

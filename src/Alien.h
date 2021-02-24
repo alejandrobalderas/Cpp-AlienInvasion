@@ -8,41 +8,44 @@ class AlienInvasion;
 
 class Alien
 {
+public:
+    // Constructor
+    Alien(AlienInvasion *game);
+
+    // Variables
+    SDL_Rect *getRect() { return &rRect; };
+    bool markDelete{false};
+
+    // Functions
+    bool checkEdges();
+    static void changeDirection();
+    void draw();
+    void update();
+    // Getters / Setters
+    int getBottomEdge();
+    int getYPos();
+    void setXPos(int x);
+    void setYPos(int y);
+    void returnLeftRightEdges(int &, int &);
+    void returnTopBottomEdges(int &, int &);
+
 private:
-    std::string pathToImage = "./images/ufo.png";
-
-    SDL_Rect rRect;
-    SDL_Renderer *rR;
-    SDL_Texture *texture;
-
-    int shapeSize;
-
-    void loadTexture();
-    void loadDstrect();
-
     enum direction
     {
         right = 1,
         left = -1
     };
+    // Variables
+    std::string pathToImage = "./images/ufo.png";
+    int shapeSize;
+    SDL_Rect rRect;
+    SDL_Renderer *rR;
+    SDL_Texture *texture;
     static direction currentDir;
-
     AlienInvasion *m_game;
 
-public:
-    Alien(AlienInvasion *game);
-    int getBottomEdge();
-    int getYPos();
-    void setXPos(int x);
-    void setYPos(int y);
-    bool checkEdges();
-    void draw();
-    void update();
-    static void changeDirection();
-    void returnLeftRightEdges(int &, int &);
-    void returnTopBottomEdges(int &, int &);
-    SDL_Rect *getRect() { return &rRect; };
-    bool markDelete{false};
+    void loadTexture();
+    void loadDstrect();
 };
 
 #endif

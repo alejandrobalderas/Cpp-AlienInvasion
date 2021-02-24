@@ -4,7 +4,7 @@
 Ship::Ship(AlienInvasion *game) : m_settings(game->settings), m_renderer(game->renderer)
 {
     rR = m_renderer->getSDLRenderer();
-    shapeSize = m_settings->getShipShapeSize();
+    shapeSize = m_settings->ship->getShipShapeSize();
     loadTexture();
     loadDstrect();
 }
@@ -18,8 +18,8 @@ void Ship::loadTexture()
 
 void Ship::loadDstrect()
 {
-    dstrect = {m_settings->getScreenWidth() / 2 - shapeSize / 2,
-               m_settings->getScreenHeight() - shapeSize,
+    dstrect = {m_settings->screen->getScreenWidth() / 2 - shapeSize / 2,
+               m_settings->screen->getScreenHeight() - shapeSize,
                shapeSize,
                shapeSize};
 }
@@ -31,10 +31,10 @@ void Ship::draw()
 
 void Ship::update()
 {
-    if (m_movingRight && dstrect.x < m_settings->getScreenWidth() - dstrect.w)
-        dstrect.x += m_settings->getShipSpeed();
+    if (m_movingRight && dstrect.x < m_settings->screen->getScreenWidth() - dstrect.w)
+        dstrect.x += m_settings->ship->getShipSpeed();
     if (m_movingLeft && dstrect.x > 0)
-        dstrect.x -= m_settings->getShipSpeed();
+        dstrect.x -= m_settings->ship->getShipSpeed();
 }
 
 void Ship::moveLeft()
