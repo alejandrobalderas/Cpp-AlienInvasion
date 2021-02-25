@@ -14,7 +14,7 @@ public:
 private:
     int bulletSpeed = 5;
     int shapeSize = 15;
-    int maxBulletsAllowed = 5;
+    int maxBulletsAllowed = 10;
     std::string pathToImage = "./images/bullet.png";
 };
 
@@ -25,6 +25,7 @@ public:
     int getMaxRowNumInFleet() { return maxRowsInFleet; };
     int getSpeed() { return speed; };
     int getDropSpeed() { return dropSpeed; };
+    void levelUp() { speed += levelUpSpeed; };
     std::string getImagePath() { return pathToImage; }
 
 private:
@@ -32,6 +33,7 @@ private:
     int maxRowsInFleet{3};
     int speed{2};
     int dropSpeed{50};
+    int levelUpSpeed{1};
     std::string pathToImage = "./images/ufo.png";
 };
 class ShipSettings

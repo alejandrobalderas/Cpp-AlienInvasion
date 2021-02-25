@@ -11,11 +11,12 @@ Alien::Alien(AlienInvasion *game)
     screenWidth = settings->screen->getScreenWidth();
     screenHeight = settings->screen->getScreenHeight();
     setShapeSize(settings->alien->getShapeSize());
+    speed = settings->alien->getSpeed();
 }
 
 void Alien::update()
 {
-    rRect.x += (settings->alien->getSpeed() * currentDirection);
+    rRect.x += (speed * currentDirection);
 }
 
 bool Alien::checkEdges()
@@ -33,4 +34,9 @@ bool Alien::checkEdges()
 void Alien::changeDirection()
 {
     currentDirection = (currentDirection == left ? right : left);
+}
+
+void Alien::levelUp()
+{
+    speed += 10;
 }

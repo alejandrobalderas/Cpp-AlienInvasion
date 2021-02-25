@@ -19,6 +19,7 @@ public:
 
     // Methods
     void renderBackground();
+    void updateWindowTitle(std::string msg);
 
 private:
     // Variables

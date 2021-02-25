@@ -7,6 +7,8 @@ class Alien;
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <thread>
+
 #include "Renderer.h"
 #include "Controller.h"
 #include "Settings.h"
@@ -21,7 +23,7 @@ public:
     ~AlienInvasion();
     void runGame();
     void draw();
-    void updateScreen();
+    void updateGame();
     void applyDelayIfNeeded(int, int);
     void fireBullet();
     std::shared_ptr<GameSettings> settings;
@@ -33,6 +35,7 @@ public:
 
     bool quitGame = false;
     SDL_Event e;
+    std::vector<std::thread> threads;
 
 private:
     std::vector<std::unique_ptr<Alien>> aliens;
@@ -44,6 +47,10 @@ private:
     void removeObjects();
     void checkForCollision();
     void moveObjects();
+    void updateWindowTitle(int, int);
+    void shipHit();
+    void restartGame();
+    void levelUp();
 };
 
 #endif

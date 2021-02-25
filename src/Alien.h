@@ -6,6 +6,8 @@ class GameSettings;
 #include <string>
 #include "SDL2/SDL.h"
 #include "Sprite.h"
+#include <thread>
+#include <vector>
 
 class Alien : public Sprite
 {
@@ -15,10 +17,11 @@ public:
 
     // Variables
     // Functions
-    // void draw();
     void update() override;
     bool checkEdges();
     static void changeDirection();
+    std::vector<std::thread> threads;
+    void levelUp();
 
 private:
     // Variables
@@ -29,6 +32,7 @@ private:
     GameSettings *settings;
     int screenWidth;
     int screenHeight;
+    int speed;
 };
 
 #endif

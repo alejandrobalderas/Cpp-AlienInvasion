@@ -52,3 +52,8 @@ void Renderer::renderBackground()
     settings->screen->getBackgroundColors(BackgroundR, BackgroundG, BackgroundB, BackgroundA);
     SDL_SetRenderDrawColor(sdl_renderer, BackgroundR, BackgroundG, BackgroundB, BackgroundA);
 }
+
+void Renderer::updateWindowTitle(std::string msg)
+{
+    SDL_SetWindowTitle(sdl_window, msg.c_str());
+}

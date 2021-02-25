@@ -2,6 +2,7 @@
 #include "SDL2/SDL.h"
 #include "AlienInvasion.h"
 #include <algorithm>
+#include <thread>
 
 AlienInvasion::AlienInvasion()
 {
@@ -22,13 +23,13 @@ void AlienInvasion::runGame()
     while (!quitGame)
     {
         controller->handleInput(this);
-        updateScreen();
+        updateGame();
         draw();
     }
 }
 
 // Updates all images on screen
-void AlienInvasion::updateScreen()
+void AlienInvasion::updateGame()
 {
     checkFleetEdges();
     moveObjects();
@@ -41,15 +42,30 @@ void AlienInvasion::moveObjects()
     ship->update();
     for (auto &bullet : bullets)
         bullet->update();
+
+    // Sequential update of aliens
+    // for (auto &alien : aliens)
+    //     alien->update();
+
+    // Parallel update of aliens
     for (auto &alien : aliens)
-        alien->update();
+        threads.emplace_back(std::thread([&alien] { alien->update(); }));
+    std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
+        t.join();
+    });
+    threads.clear();
 }
 
 void AlienInvasion::checkForCollision()
 {
-    for (auto &bullet : bullets)
+    for (auto &alien : aliens)
     {
-        for (auto &alien : aliens)
+        if (Sprite::checkForCollision(alien.get(), ship.get()))
+        {
+            shipHit();
+            break;
+        }
+        for (auto &bullet : bullets)
         {
             if (Sprite::checkForCollision(bullet.get(), alien.get()))
             {
@@ -75,6 +91,11 @@ void AlienInvasion::removeObjects()
                 return alien->markDelete;
             }),
         aliens.end());
+    if (aliens.empty())
+    {
+        levelUp();
+        restartGame();
+    }
 }
 
 void AlienInvasion::draw()
@@ -90,12 +111,30 @@ void AlienInvasion::draw()
     SDL_RenderPresent(renderer->getSDLRenderer());
     int frame_end = SDL_GetTicks();
     applyDelayIfNeeded(frame_start, frame_end);
+    // updateWindowTitle(frame_start, frame_end);
+}
+
+void AlienInvasion::updateWindowTitle(int frame_start, int frame_end)
+{
+    int frame_duration = frame_end - frame_start;
+    std::string msg;
+    if (frame_duration == 0)
+    {
+        msg = "FPS: 1000";
+    }
+    else
+    {
+        int fps = 1000 / frame_duration;
+        msg = "FPS: " + std::to_string(fps);
+    }
+    renderer->updateWindowTitle(msg);
 }
 
 void AlienInvasion::applyDelayIfNeeded(int frame_start, int frame_end)
 {
     int frame_duration = frame_end - frame_start;
-    if (frame_duration < settings->screen->getTargetFrameDuration())
+    int target_duration = settings->screen->getTargetFrameDuration();
+    if (frame_duration < target_duration)
     {
         SDL_Delay(settings->screen->getTargetFrameDuration() - frame_duration);
     }
@@ -159,4 +198,25 @@ void AlienInvasion::changeFleetDirection()
         a->setYPos(a->getYPos() + settings->alien->getDropSpeed());
     }
     Alien::changeDirection();
+}
+
+void AlienInvasion::shipHit()
+{
+    // Respond to the Ship being hit by Aliens
+    restartGame();
+    SDL_Delay(500);
+}
+
+void AlienInvasion::restartGame()
+{
+    // Remove all remaining objects and create new ones with their starting positions
+    aliens.clear();
+    bullets.clear();
+    createFleet();
+    ship->setInitialPos();
+}
+
+void AlienInvasion::levelUp()
+{
+    settings->alien->levelUp();
 }

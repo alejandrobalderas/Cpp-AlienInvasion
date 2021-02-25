@@ -24,6 +24,7 @@ public:
     void moveRight();
     void stopMovingRight();
     void stopMovingLeft();
+    void setInitialPos();
     // Getters / Setters
     void getShipPositionForBullet(int &x, int &y) const;
 
@@ -32,13 +33,12 @@ private:
     SDL_Renderer *rR;
     bool m_movingRight{false};
     bool m_movingLeft{false};
-    AlienInvasion *game;
-    GameSettings *settings;
     int screenWidth;
     int screenHeight;
+    AlienInvasion *game;
+    GameSettings *settings;
 
     // Methods
-    void setInitialPos();
 };
 
 #endif

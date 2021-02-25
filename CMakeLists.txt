@@ -6,6 +6,8 @@ add_definitions(-std=c++17)
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+set(TRHEADS_PREFER_PTHREAD_FLAG ON)
+
 
 include(CTest)
 enable_testing()
@@ -24,6 +26,10 @@ file(COPY src/images DESTINATION .)
 
 find_package(SDL2 CONFIG REQUIRED)
 find_package(sdl2-image REQUIRED)
+find_package(Threads REQUIRED)
+
+
 include_directories($(SDL2_INCLUDE_DIRS) ${SDL2_IMAGE_INCLUDE_DIRS} src)
 target_link_libraries(SpaceInvader PRIVATE SDL2::SDL2main SDL2::SDL2-static)
 target_link_libraries(SpaceInvader PRIVATE SDL2::SDL2_image)
+target_link_libraries(SpaceInvader PRIVATE Threads::Threads)
