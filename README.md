@@ -55,12 +55,12 @@ $ ./run.sh
 
 ### OOP
 
-- :heavy_check_mark: Project users OOP techniques
-- [x] Classes use appropriate access specifiers for class members
-- [x] Class constructors utilize member initialization lists
-- [x] Classes abstract implementation details from their interfaces.
-- [x] Classes follow an appropriate inheritance hierarchy
-- Derived class functions override virtual base class functions
-- The project makes use of references in function declarations
-- The project uses smart pointers instead of raw pointers.
-- The project uses multithreading. (Just for fun in AllienInvasion starting on line 51.)
+- [x] Project users OOP techniques :heavy_check_mark:
+- [x] Classes use appropriate access specifiers for class members :heavy_check_mark:
+- [x] Class constructors utilize member initialization lists :heavy_check_mark:
+- [x] Classes abstract implementation details from their interfaces. :heavy_check_mark:
+- [x] Classes follow an appropriate inheritance hierarchy :heavy_check_mark:
+- [x] Derived class functions override virtual base class functions :heavy_check_mark:
+- [x] The project makes use of references in function declarations :heavy_check_mark:
+- [x] The project uses smart pointers instead of raw pointers. :heavy_check_mark:
+- [x] The project uses multithreading. (Just for fun in AllienInvasion starting on line 51.) :heavy_check_mark:
