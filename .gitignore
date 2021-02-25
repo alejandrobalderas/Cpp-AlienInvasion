@@ -1,4 +1,7 @@
 build/
+*[D-d]ocker*
+.devcontainer
+
 
 ### C++ ###
 # Prerequisites

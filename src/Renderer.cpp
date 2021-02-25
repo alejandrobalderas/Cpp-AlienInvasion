@@ -1,6 +1,4 @@
 #include <iostream>
-#include "SDL2/SDL_image.h"
-
 #include "Renderer.h"
 
 Renderer::Renderer(const std::shared_ptr<GameSettings> settings) : settings(settings)

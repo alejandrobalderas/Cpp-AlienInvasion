@@ -5,7 +5,6 @@ class GameSettings;
 #define SHIP_H
 
 #include <string>
-#include <SDL2/SDL_image.h>
 #include <memory>
 #include "Sprite.h"
 
