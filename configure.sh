@@ -2,9 +2,10 @@
 
 # Install VCPKG
 VCPKGROOT="/home/$(whoami)/vcpkg"
-git clone https://github.com/microsoft/vcpkg $VCPKROOT
 export VCPKGROOT
-./bootstrap-vcpkg.sh
+export PATH="$PATH:$VCPKGROOT"
+git clone https://github.com/microsoft/vcpkg $VCPKGROOT
+$VCPKGROOT/bootstrap-vcpkg.sh
 
 # Install needed libraries
 vcpkg integrate install
