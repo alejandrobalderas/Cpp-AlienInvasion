@@ -25,22 +25,25 @@ If you are using Ubuntu you can just run the ./configure.sh script which will in
 
 ### Installing vcpkg from the Microsoft repository
 
+This installs and configures vcpkg inside of the home directory of the current user and exports the path.
 ```bash
 $ VCPKGROOT="/home/$(whoami)/vcpkg"
 $ export VCPKGROOT
 $ export PATH="$PATH:$VCPKGROOT"
 $ git clone https://github.com/microsoft/vcpkg $VCPKGROOT
 $ $VCPKGROOT/bootstrap-vcpkg.s
+$ vcpkg integrate install
 ```
 
 ### Installing the needed libraries
 
+Install SDL2 and SDL2-image to be able to compile the programm
 ```bash
-$ vcpkg integrate install
 $ vcpkg install sdl2 sdl2-image
 ```
 
 ## Build Project
+Clears the build directory if it exists, creates it and calls the cmake command with the needed flag -DCMAKE_TOOLCHAIN_FILE. It then compiles all files for the project
 ```bash
 $ rm -rf build/
 $ mkdir build
@@ -50,13 +53,13 @@ $ make
 ```
 
 ### Configuring and building the project
-
+This script runs all the steps above in one go.
 ```bash
 $ ./configure.sh
 ```
 
 ### Running the game
-
+Just calls the excecutable inside the build directory
 ```bash
 $ ./run.sh
 ```
