@@ -2,6 +2,12 @@
 
 In this repo you will find a simple version of the Alien Invasion game written in C++ with the SDL Library.
 
+## How to play
+
+Move using your left and right arrow keys. Shoot with space bar. Quit game by pressing the "q" key in your keyboard.
+
+![plot](./assets/gameplay.png)
+
 ## Project Structure
 
     ├── build                   # Compiled files
@@ -40,6 +46,7 @@ $ vcpkg install sdl2 sdl2-image
 ```
 
 ## Build Project
+
 ```bash
 $ rm -rf build/
 $ mkdir build
