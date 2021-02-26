@@ -21,7 +21,7 @@ In this repo you will find a simple version of the Alien Invasion game written i
 ## Build from source and running
 
 Running on linux please install vcpkg
-If you are using Ubuntu you can just run the ./configure.sh script which will install vcpkg to manage package dependencies as well as install the sdl2 and sdl2-image libraries
+If you are using Ubuntu you can just run the `./configure.sh` script which will install vcpkg to manage package dependencies as well as install the sdl2 and sdl2-image libraries
 
 ### Installing vcpkg from the Microsoft repository
 
