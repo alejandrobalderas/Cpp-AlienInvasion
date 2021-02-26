@@ -26,10 +26,11 @@ If you are using Ubuntu you can just run the ./configure.sh script which will in
 ### Installing vcpkg from the Microsoft repository
 
 ```bash
-$ VCPKGROOT="[path to vcpkg]" # Example: /home/$(whoami)/vcpkg
-$ git clone https://github.com/microsoft/vcpkg VCPKROOT
+$ VCPKGROOT="/home/$(whoami)/vcpkg"
 $ export VCPKGROOT
-$ ./bootstrap-vcpkg.sh
+$ export PATH="$PATH:$VCPKGROOT"
+$ git clone https://github.com/microsoft/vcpkg $VCPKGROOT
+$ $VCPKGROOT/bootstrap-vcpkg.s
 ```
 
 ### Installing the needed libraries
