@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 
+project(AlienInvasion VERSION 0.1.0)
 
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
@@ -8,12 +9,10 @@ set(TRHEADS_PREFER_PTHREAD_FLAG ON)
 
 add_definitions(-std=c++17)
 
-project(AlienInvasion VERSION 0.1.0)
 
 include(CTest)
 enable_testing()
 
-# add_executable(AlienInvasion src/main.cpp src/AlienInvasion.cpp src/Renderer.cpp src/Controller.cpp src/Settings.cpp src/Ship.cpp src/Bullet.cpp)
 
 file(GLOB_RECURSE alien_SOURCES "src/*.cpp")
 add_executable (AlienInvasion ${alien_SOURCES})
