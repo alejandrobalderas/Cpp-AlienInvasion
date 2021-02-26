@@ -26,10 +26,10 @@ If you are using Ubuntu you can just run the ./configure.sh script which will in
 ### Installing vcpkg from the Microsoft repository
 
 ```bash
-$ VCPKGROOT="[path to vcpkg]"
+$ VCPKGROOT="[path to vcpkg]" # Example: /home/$(whoami)/vcpkg
 $ git clone https://github.com/microsoft/vcpkg VCPKROOT
-$ ./bootstrap-vcpkg.sh
 $ export VCPKGROOT
+$ ./bootstrap-vcpkg.sh
 ```
 
 ### Installing the needed libraries
@@ -37,6 +37,15 @@ $ export VCPKGROOT
 ```bash
 $ vcpkg integrate install
 $ vcpkg install sdl2 sdl2-image
+```
+
+## Build Project
+```bash
+$ rm -rf build/
+$ mkdir build
+$ cd build
+$ cmake .. -DCMAKE_TOOLCHAIN_FILE=${VCPKGROOT}/scripts/buildsystems/vcpkg.cmake
+$ make
 ```
 
 ### Configuring and building the project
