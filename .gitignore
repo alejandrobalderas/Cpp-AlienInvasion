@@ -1,6 +1,7 @@
 build/
 *[D-d]ocker*
 .devcontainer
+artifacts
 
 
 ### C++ ###
