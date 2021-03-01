@@ -27,24 +27,32 @@ Move using your left and right arrow keys. Shoot with space bar. Quit game by pr
 ## Build from source and running
 
 Running on linux please install vcpkg
-If you are using Ubuntu you can just run the ./configure.sh script which will install vcpkg to manage package dependencies as well as install the sdl2 and sdl2-image libraries
+If you are using Ubuntu you can just run the `./configure.sh` script which will install vcpkg to manage package dependencies as well as install the sdl2 and sdl2-image libraries
 
 ### Installing vcpkg from the Microsoft repository
 
+This installs and configures vcpkg inside of the home directory of the current user and exports the path.
+
 ```bash
-VCPKGROOT="[path to vcpkg]" # Example: /home/$(whoami)/vcpkg
-git clone https://github.com/microsoft/vcpkg VCPKROOT
-export VCPKGROOT
-./bootstrap-vcpkg.sh
+$ VCPKGROOT="/home/$(whoami)/vcpkg"
+$ export VCPKGROOT
+$ export PATH="$PATH:$VCPKGROOT"
+$ git clone https://github.com/microsoft/vcpkg $VCPKGROOT
+$ $VCPKGROOT/bootstrap-vcpkg.s
+$ vcpkg integrate install
 ```
 
 ### Installing the needed libraries
 
+Install SDL2 and SDL2-image to be able to compile the programm
+
 ```bash
-vcpkg install sdl2 sdl2-image
+$ vcpkg install sdl2 sdl2-image
 ```
 
 ## Build Project
+
+Clears the build directory if it exists, creates it and calls the cmake command with the needed flag -DCMAKE_TOOLCHAIN_FILE. It then compiles all files for the project
 
 ```bash
 rm -rf build/
@@ -56,11 +64,15 @@ make
 
 ### Configuring and building the project
 
+This script runs all the steps above in one go.
+
 ```bash
 ./configure.sh
 ```
 
 ### Running the game
+
+Just calls the excecutable inside the build directory
 
 ```bash
 ./run.sh
