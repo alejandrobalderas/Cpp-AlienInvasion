@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  alien_invasion:
+    image: alien_invasion
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./artifacts/:/app/artifacts/
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: "host"
+    environment:
+      - "DISPLAY"
+      - NO_AT_BRIDGE=1
